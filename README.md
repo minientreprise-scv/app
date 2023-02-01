@@ -1,6 +1,8 @@
 
 <div style="text-align: center">
 
+<img alt="Une e-plante bannière" src="https://github.com/minientreprise-scv/app/blob/main/assets/charte/banniere.png?raw=true" width="800">
+
 # Une e-plante
 [![Flask](https://img.shields.io/pypi/wheel/flask?label=Flask&style=for-the-badge)](https://img.shields.io/pypi/wheel/flask?label=Flask&style=for-the-badge)
 [![License](https://img.shields.io/badge/License-CeCill%20v2.1-red?style=for-the-badge)](https://img.shields.io/badge/License-CeCill%20v2.1-red?style=for-the-badge)
