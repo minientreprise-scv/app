@@ -30,6 +30,11 @@ body {
 
 .title {
     font-weight: normal;
+    color: var(--black);
+}
+
+.subtitle {
+    color: var(--grey);
 }
 
 .navbar {
@@ -73,6 +78,14 @@ strong, b {
     background-color: var(--white);
 }
 
+.section.us {
+    display: flex;
+    padding-top: 15em;
+    padding-bottom: 12em;
+    clip-path: polygon(0 12%, 100% 1%, 100% 100%, 0% 100%);
+    background-color: #fff;
+}
+
 .section.is-divided .left, .section.is-divided .right {
     display: flex;
     flex-direction: column;
@@ -88,17 +101,22 @@ strong, b {
 }
 
 .container {
+    transition: .5s ease-in-out;
     margin: 2em;
     padding: 1.5em;
     height: 40vh;
     width: 30em !important;
     max-width: 30em !important;
     background-color: var(--white);
-    border: 3px solid #fff;
+    border: 3px solid var(--transparent-grey);
     border-radius: 10px;
     display: flex;
     flex-direction: column;
     justify-content: start;
+}
+
+.container:hover {
+    box-shadow: 5px 5px 2px var(--transparent-grey);
 }
 
 .container .content {
@@ -128,6 +146,74 @@ strong, b {
 .container .image img {
     max-height: 100%;
     width: auto;
+}
+
+
+.team {
+    width: 50%;
+}
+
+.poles {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(21em, 1fr));
+}
+
+.poles .pole {
+    margin: 1em;
+    padding: .5em;
+    height: max-content;
+    width: 20em;
+    border: 2px solid var(--grey);
+    border-radius: 20px;
+}
+
+.sponsors {
+    width: 50%;
+}
+
+.sponsors-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.sponsor {
+    transition: .5s ease-in-out;
+    opacity: 0.5;
+    filter: grayscale(1) blur(1px);
+}
+.sponsor:hover {
+    opacity: 1;
+    filter: grayscale(0) blur(0);
+}
+
+.footer {
+    display: flex;
+    background-color: var(--white);
+}
+
+.footer .list {
+    margin: 1em;
+}
+
+.footer .right {
+    width: 80%;
+    display: flex;
+}
+
+.footer .left {
+    width: 15%;
+    margin-right: 5%;
+}
+
+.footer:before {
+    content: "";
+    position: absolute;
+    background-image: linear-gradient(rgba(0, 0, 0, 0), var(--white));
+    width: 100vw;
+    height: 10%;
+    left: 0;
+    transform: translateY(-136%);
+    z-index: 10000;
 }
 
 /* Bulma color changer
