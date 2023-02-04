@@ -1,1 +1,3 @@
 flask
+configparser
+pymongo

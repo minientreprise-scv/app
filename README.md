@@ -22,3 +22,30 @@ Une plante et un qr code pour apprendre à jardiner !
 
 - Code source: licence [Cecill v2.1](https://github.com/minientreprise-scv/app/blob/main/LICENSE) droits à Brice, Armand et au Collège du Sacré Coeur Vercel.
 - Éléments graphique relatifs "Une e-plante": licence [CC BY-NC-ND 3.0 FR](https://creativecommons.org/licenses/by-nc-nd/3.0/fr/) par Armand
+
+## Documentation
+
+#### Dépendances / configuration
+
+- **Python** doit être installé 
+- Les librairies du requirements.txt
+```bash
+python3 -m pip install -r requirements.txt 
+```
+- Les informations d'une base MongoDB dans `config.ini` sont requises
+```ini
+[mongodb.net]
+mongo_server=
+mongo_user=
+mongo_password=
+```
+
+Tout est prêt, l'application peut démarrer
+
+#### Lancement de l'application
+
+Pour démarrer le serveur web, il faut simplement exécuter le fichier `main.py`.
+
+```bash
+python3 main.py
+```
