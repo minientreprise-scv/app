@@ -1,0 +1,133 @@
+:root {
+    --white: #e0e0e0;
+    --black: #252525;
+    --grey: #808080;
+    --transparent-grey: rgba(128, 128, 128, 0.22);
+    --brown: #583f01;
+    --light-brown: #705001;
+    --green: #158e4d;
+    --light-green: #1ab260;
+}
+
+@font-face {
+    font-face-name: "Liivic-Website";
+    src: url('/static/assets/charte/police/Livvic-SemiBold.ttf');
+    font-weight: bold;
+}
+
+@font-face {
+    font-face-name: "Liivic-Website";
+    src: url('/static/assets/charte/police/Livvic-Medium.ttf');
+    font-weight: normal;
+}
+
+body {
+    font-family: "Liivic-Website", sans-serif;
+    background-color: var(--white);
+    color: var(--black);
+    scroll-behavior: smooth !important;
+}
+
+.title {
+    font-weight: normal;
+}
+
+.navbar {
+    padding: .5em 5em .5em .5em;
+}
+
+.navbar-end .navbar-item {
+    padding: .8em;
+    border-radius: 10px;
+}
+
+.navbar-end .navbar-item.qr {
+    padding: .8em;
+    background-color: var(--green);
+    color: var(--white);
+    margin-left: 2em;
+}
+
+.navbar-end .navbar-item.qr:hover {
+    background-color: var(--light-green) !important;
+}
+
+.navbar-end .navbar-item:hover {
+    background-color: var(--transparent-grey) !important;
+}
+
+strong, b {
+    font-weight: bold;
+}
+
+.section.is-divided {
+    display: flex;
+}
+
+.section.landing {
+    background-color: var(--transparent-grey);
+    clip-path: polygon(0 0, 100% 0, 100% 83%, 0 94%);
+}
+
+.section.features {
+    background-color: var(--white);
+}
+
+.section.is-divided .left, .section.is-divided .right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+}
+.containers {
+    display: grid;
+    margin: auto;
+    grid-template-columns: repeat(auto-fit, minmax(32em, 1fr));
+    width: 99%;
+}
+
+.container {
+    margin: 2em;
+    padding: 1.5em;
+    height: 40vh;
+    width: 30em !important;
+    max-width: 30em !important;
+    background-color: var(--white);
+    border: 3px solid #fff;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
+
+.container .content {
+    height: 50%;
+    padding-top: 2em;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+}
+
+.container .content .title {
+    text-align: center;
+}
+
+.container .content .subtitle {
+    text-align: justify;
+}
+
+.container .image {
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container .image img {
+    max-height: 100%;
+    width: auto;
+}
+
+/* Bulma color changer
