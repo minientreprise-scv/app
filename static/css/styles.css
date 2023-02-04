@@ -187,6 +187,8 @@ strong, b {
 }
 
 .footer {
+    padding-top: 5em;
+    padding-bottom: 2em;
     display: flex;
     background-color: var(--white);
 }
@@ -212,7 +214,7 @@ strong, b {
     width: 100vw;
     height: 10%;
     left: 0;
-    transform: translateY(-136%);
+    transform: translateY(-160%);
     z-index: 10000;
 }
 
