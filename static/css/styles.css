@@ -57,6 +57,18 @@ body {
     background-color: var(--light-green) !important;
 }
 
+
+.navbar-end .navbar-item.dashboard {
+    padding: .8em;
+    background-color: var(--brown);
+    color: var(--white);
+    margin-left: 2em;
+}
+
+.navbar-end .navbar-item.dashboard:hover {
+    background-color: var(--light-brown) !important;
+}
+
 .navbar-end .navbar-item:hover {
     background-color: var(--transparent-grey) !important;
 }
