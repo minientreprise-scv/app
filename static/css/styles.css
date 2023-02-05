@@ -167,6 +167,12 @@ strong, b {
     border-radius: 20px;
 }
 
+.poles .pole p {
+    padding-left: 1em;
+    width: 100%;
+    text-align: left;
+}
+
 .sponsors {
     width: 50%;
 }
