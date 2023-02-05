@@ -44,7 +44,7 @@ Tout est prêt, l'application peut démarrer
 
 #### Lancement de l'application
 
-Pour démarrer le serveur web, il faut simplement exécuter le fichier `main.py`.
+Pour démarrer le serveur web, il faut simplement exécuter le fichier `main.py` (à la racine du projet).
 
 ```bash
 python3 main.py
