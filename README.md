@@ -42,10 +42,35 @@ mongo_password=
 
 Tout est prêt, l'application peut démarrer
 
-#### Lancement de l'application
+#### Lancement de l'application - Mode développement
 
 Pour démarrer le serveur web, il faut simplement exécuter le fichier `main.py` (à la racine du projet).
 
 ```bash
 python3 main.py
 ```
+
+#### Lancement de l'application - Mode production
+
+Le mode production exécute l'application compilée avec un serveur `uvicorn`.
+
+1. Compiler l'application:
+```shell
+sh bin/build.sh
+```
+
+[//]: # (ou)
+
+[//]: # ()
+[//]: # (```)
+
+[//]: # (bin/build.bat)
+
+[//]: # (```)
+
+2. Lancer le programme compilé
+
+```shell
+python3 serve.pyc
+```
+
