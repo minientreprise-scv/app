@@ -46,26 +46,31 @@ body {
     border-radius: 10px;
 }
 
-.navbar-end .navbar-item.qr {
+.navbar-end .navbar-item.qr, .button.is-green {
     padding: .8em;
     background-color: var(--green);
     color: var(--white);
-    margin-left: 2em;
+    border-radius: 10px;
 }
 
-.navbar-end .navbar-item.qr:hover {
+.navbar-end .navbar-item.qr:hover, .button.is-green:hover {
     background-color: var(--light-green) !important;
 }
 
 
-.navbar-end .navbar-item.dashboard {
+.navbar-end .navbar-item.dashboard, .navbar-end .navbar-item.qr {
+    margin-left: 2em;
+
+}
+
+.navbar-end .navbar-item.dashboard, .button.is-brown {
     padding: .8em;
     background-color: var(--brown);
     color: var(--white);
-    margin-left: 2em;
+    border-radius: 10px;
 }
 
-.navbar-end .navbar-item.dashboard:hover {
+.navbar-end .navbar-item.dashboard:hover, .button.is-brown:hover {
     background-color: var(--light-brown) !important;
 }
 
@@ -234,6 +239,72 @@ strong, b {
     left: 0;
     transform: translateY(-160%);
     z-index: 10000;
+}
+
+.modal-content {
+    border-radius: 10px;
+    padding: 2em 2em;
+    background-color: var(--white);
+}
+
+.input {
+    background-color: var(--white);
+}
+
+.icon {
+    color: var(--grey) !important;
+}
+
+.square {
+    padding: 2em;
+    width: 100%;
+    height: calc(100%);
+    border-radius: 15px;
+    transition: .2s ease-in-out;
+}
+
+.square:hover {
+    transform: scale(1.02);
+    border-radius: 20px;
+}
+
+.level .title {
+    font-weight: bold;
+}
+
+.file.is-boxed .file-cta {
+    border-radius: 8px;
+    background-color: var(--transparent-grey);
+}
+
+.file.is-boxed .file-cta:hover {
+    background-color: var(--grey);
+    color: var(--white);
+}
+
+.tag {
+    margin: .5em;
+}
+
+.select select {
+    background-color: var(--white);
+    border-radius: 10px;
+}
+
+hr {
+    background-color: var(--transparent-grey) !important;
+}
+
+.image.is-qr {
+    margin: auto;
+    width: max-content;
+}
+
+.image.is-qr img {
+    border-radius: 10px;
+    border: 2px solid var(--grey);
+    width: 500px;
+    height: 500px;
 }
 
 /* Bulma color changer
