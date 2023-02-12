@@ -20,6 +20,9 @@
     src: url('/static/assets/charte/police/Livvic-Medium.ttf');
     font-weight: normal;
 }
+html {
+    background-color: var(--white);
+}
 
 body {
     font-family: "Liivic-Website", sans-serif;
