@@ -310,4 +310,31 @@ hr {
     height: 500px;
 }
 
-/* Bulma color changer
+.column.has-multiples-boxes {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.column.has-multiples-boxes:first-child {
+    height: auto;
+}
+
+img.is-cover {
+    object-fit: cover;
+}
+
+table tbody th {
+    font-weight: normal;
+}
+
+table tbody th .tag {
+    font-weight: bold;
+    margin: 0;
+}
+
+#financesGraph {
+    border: 2px solid var(--transparent-grey);
+    border-radius: 15px;
+    height: 100%;
+}
