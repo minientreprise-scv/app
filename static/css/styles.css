@@ -219,18 +219,27 @@ strong, b {
     background-color: var(--white);
 }
 
+
+.footer .left .is-small {
+    color: var(--grey);
+}
+
+.footer .right .subtitle {
+    color: var(--black);
+}
+
 .footer .list {
     margin: 1em;
 }
 
 .footer .right {
-    width: 80%;
+    width: 70%;
     display: flex;
 }
 
 .footer .left {
-    width: 15%;
-    margin-right: 5%;
+    width: 20%;
+    margin-right: 10%;
 }
 
 .footer:before {
