@@ -13,10 +13,12 @@
   <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
       <a class="navbar-item" href="https://minientreprise.sacrecoeurvercel.com">
-        <img src="/static/assets/charte/logo_large.png" height="150">
+        <img height="150">
       </a>
 
-      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+      <a href="/scan" class="navbar-item button is-success is-hidden-desktop">Scanner mon QR&nbsp;<i class="fas fa-qrcode"></i></a>
+
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample" onclick="document.getElementById('mainNavMenu').classList.toggle('is-active'); this.classList.toggle('is-active')">
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
