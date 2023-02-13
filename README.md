@@ -17,11 +17,12 @@ Une plante et un qr code pour apprendre à jardiner !
 - [Liivic](https://fonts.google.com/specimen/Livvic): Police d'écriture ([licence OFL](https://github.com/minientreprise-scv/app/blob/main/assets/charte/police/OFL.txt))
 - [Python](https://www.python.org)
 - [Flask](https://flask.palletsprojects.com/en/2.2.x)
+- [Fontawesome](https://fontawesome.com)
 
 #### Elements créés par "Une e-plante"
 
 - Code source: licence [Cecill v2.1](https://github.com/minientreprise-scv/app/blob/main/LICENSE) droits à Brice, Armand et au Collège du Sacré Coeur Vercel.
-- Éléments graphique relatifs "Une e-plante": licence [CC BY-NC-ND 3.0 FR](https://creativecommons.org/licenses/by-nc-nd/3.0/fr/) par Armand
+- Éléments graphique relatifs à "Une e-plante": licence [CC BY-NC-ND 3.0 FR](https://creativecommons.org/licenses/by-nc-nd/3.0/fr/) par Armand
 
 ## Documentation
 
@@ -32,12 +33,15 @@ Une plante et un qr code pour apprendre à jardiner !
 ```bash
 python3 -m pip install -r requirements.txt 
 ```
-- Les informations d'une base MongoDB dans `config.ini` sont requises
+- Les informations d'une base MongoDB dans `config.ini` sont requises ainsi que des clés phrases de passe pour les administrateurs (séparées de virgules).
 ```ini
 [mongodb.net]
 mongo_server=
 mongo_user=
 mongo_password=
+
+[administration]
+passphrases=superpassphraseforadministrat%%r1,anothoeradministartor's p4ssphr4se
 ```
 
 Tout est prêt, l'application peut démarrer
