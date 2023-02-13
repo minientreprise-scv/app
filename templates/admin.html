@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Une e-plante, administration</title>
+  <link rel="stylesheet" href="/static/css/bulma.min.css">
+  <link rel="stylesheet" href="/static/css/styles.css">
+  <link rel="icon" href="/static/assets/charte/icon.png">
+  <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v5.15.4/css/all.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+  <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="/static/js/custom-toolbar.js"></script>
+</head>
+</head>
+<body style="padding: 2em; height: 100vh; overflow: scroll; margin-bottom: 5em;">
+
+<section class="section">
+  <h1 class="title is-1">Bonjour, bienvenue sur la page d'administration</h1>
+</section>
+
+<div class="columns is-desktop is-multiline">
+  <div class="column has-multiples-boxes">
+    <div class="square box">
+
+        <h3 class="title"><i class="fas fa-chart-bar has-text-grey-light"></i>&nbsp;Chiffres</h3>
+        <nav class="level">
+          <div class="level-item has-text-centered">
+            <div>
+              <p class="heading">Plantes vendues</p>
+              <p class="title">{{sold}}</p>
+            </div>
+          </div>
+          <div class="level-item has-text-centered">
+            <div>
+              <p class="heading">Types de plantes</p>
+              <p class="title">{{types}}</p>
+            </div>
+          </div>
+          <div class="level-item has-text-centered">
+            <div>
+              <p class="heading">Documentations</p>
+              <p class="title">{{documentations}}</p>
+            </div>
+          </div>
+        </nav>
+      </div>
+
+    <div class="square box">
+      <h3 class="title"><i class="fas fa-books has-text-grey-light"></i>&nbsp;Documentations</h3>
+      <div class="field">
+        <div class="label">Documentation</div>
+        <div class="select">
+          <select name="modifyDoc">
+            {% for type in plants_types %}
+            <optgroup label="{{type.name}}">
+              {{type.id}}
+              {% for doc in documentation_pages[type._id|string] %}
+              <option value="{{doc._id}}">{{type.name}} - {{doc.title}} ({{doc.state}})</option>
+              {% endfor %}
+            </optgroup>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+      <hr>
+      <button class="button is-brown" onclick="toggleModal(document.querySelector('[name=modifyDoc]').value)">Modifier la documentation&nbsp;<i class="fas fa-pen"></i></button>
+    </div>
+  </div>
+
+  <div class="column has-multiples-boxes">
+      <div class="square box">
+        <h3 class="title"><i class="fas fa-thumbtack has-text-grey-light"></i>&nbsp;Ventes</h3>
+        <button class="button is-green" onclick="toggleModal('sell-plant')">Créer un qr code&nbsp;<i class="fas fa-qrcode"></i></button>
+      </div>
+
+      <div class="square box">
+        <h3 class="title"><i class="fas fa-seedling has-text-grey-light"></i>&nbsp;Plantes</h3>
+        <button class="button is-green" onclick="toggleModal('add-plant')">Ajouter un type de plante&nbsp;<i class="fas fa-flower"></i></button>
+        <button class="button is-brown" onclick="toggleModal('add-documentation')">Ajouter de la documentation&nbsp;<i class="fas fa-book"></i></button>
+      </div>
+
+      <div class="square box">
+        <h3 class="title"><i class="fas fa-money-bill-wave has-text-grey-light"></i>&nbsp;Ajouter au suivi financier</h3>
+        <form action="/admin/add-expense" method="post">
+          <div class="field">
+            <div class="label">Commentaire</div>
+            <div class="control has-icons-left">
+              <input class="input" type="text" placeholder="Achat coupe verre" name="comment" required>
+              <span class="icon is-left">
+                <i class="fas fa-stream"></i>
+              </span>
+            </div>
+          </div>
+          <div class="field is-grouped">
+            <div class="control has-icons-right">
+              <input class="input is-success" type="number" step="0.01" placeholder="-32,5" name="value" required>
+              <span class="icon is-right">
+              <i class="fas fa-euro"></i>
+            </span>
+            </div>
+            <div class="control">
+              <button class="button is-brown">Ajouter l'entrée&nbsp;<i class="fas fa-plus"></i></button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  <div class="column">
+    <div class="square box">
+      <h3 class="title"><i class="fas fa-money-check-alt has-text-grey-light"></i>&nbsp;Suivi financier</h3>
+      <div class="tabs is-centered">
+        <ul id="financesTab">
+          <li class="is-active" data-target="financesFollow">
+            <a type="button" onclick="toggleTab('financesTab')">
+              <span class="icon is-small"><i class="fas fa-stream" aria-hidden="true"></i></span>
+              <span>Suivi</span>
+            </a>
+          </li>
+          <li data-target="financesGraph">
+            <a type="button" onclick="toggleTab('financesTab')">
+              <span class="icon is-small"><i class="fas fa-chart-line" aria-hidden="true"></i></span>
+              <span>Graphique</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <table class="table is-fullwidth" id="financesFollow">
+        <thead>
+        <tr>
+          <th>Date</th>
+          <th>Valeur</th>
+          <th>Commentaire</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for expense in expenses %}
+        <tr>
+          <th>{{expense.readable_date}}</th>
+          <th>
+            {% if expense.value > 0 %}
+              <span class="tag is-success">+{{expense.value}}€</span>
+            {% else %}
+              <span class="tag is-danger">{{expense.value}}€</span>
+            {% endif %}
+          </th>
+          <th>{{expense.comment}}</th>
+        </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+      <canvas id="financesGraph" height="200" class="is-hidden"></canvas>
+      <script>
+          const labels = {{expenses_chart[0]|safe}}
+          const datas = {{expenses_chart[1]|safe}}
+          const ctx = document.getElementById('financesGraph');
+
+
+          const config = {
+              type: 'line',
+              data: datas,
+              options: {
+                  responsive: true,
+                  plugins: {
+                      legend: {
+                          position: 'top',
+                      },
+                      title: {
+                          display: true,
+                          text: 'Solde de la minientreprise en fonction des jours'
+                      }
+                  }
+              },
+          }
+
+          new Chart(ctx, {
+              type: 'line',
+              data: {
+                  labels: labels,
+                  datasets: [{
+                      label: 'Solde de la minientreprise en €',
+                      data: datas,
+                      borderWidth: 1,
+                      backgroundColor: '#1ab260',
+                      borderColor: '#1ab260'
+                  }]
+              },
+              options: {
+                  layout: {
+                      padding: 20
+                  },
+                  responsive: true,
+                  plugins: {
+                      legend: {
+                          position: 'top',
+                      },
+                      title: {
+                          display: true,
+                          text: 'Solde de la minientreprise en fonction des jours'
+                      },
+                  },
+                  scales: {
+                      y: {
+                          suggestedMin: 0,
+                          suggestedMax: 100,
+                          beginAtZero: false,
+                          border: {
+                              display: false
+                          },
+                          grid: {
+                              color: function (context) {
+                                  if (context.tick.value > 0) {
+                                      return "rgba(128, 128, 128, 0.22)";
+                                  } else if (context.tick.value < 0) {
+                                      return "rgba(204,15,53,0.46)";
+                                  }
+
+                                  return 'rgba(128, 128, 128, 0.22)';
+                              },
+                          },
+                      }
+                  }
+              }
+          })
+      </script>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal" id="add-plant">
+  <div class="modal-background"></div>
+  <div class="modal-content">
+    <form action="/admin/add-plant" method="post" enctype="multipart/form-data">
+      <div class="field">
+        <label class="label">Nom</label>
+        <div class="control has-icons-left">
+          <input class="input is-success" type="text" placeholder="Orchidée" name="name" required>
+          <span class="icon is-small is-left is-green">
+            <i class="fas fa-seedling"></i>
+          </span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Description</label>
+        <div class="control has-icons-left">
+          <input class="input is-hovered" type="text" placeholder="Plante d'intérieur à fleur..." name="description" required>
+          <span class="icon is-small is-left">
+            <i class="fas fa-align-left"></i>
+          </span>
+        </div>
+        <p class="help is-success"><i class="fas fa-info-circle"></i>&nbsp;Deux phrases qui décrivent la plante (fleurs ?), et son environnement.</p>
+      </div>
+
+      <div class="field">
+        <label class="label">Photos</label>
+        <div class="control">
+          <div class="file is-boxed">
+            <label class="file-label">
+              <input class="file-input" type="file" name="photos" multiple onchange="showFilesLabel(this, document.getElementById('[add-plant]file-labels'))" required>
+              <span class="file-cta">
+                <span class="file-icon">
+                  <i class="fas fa-upload"></i>
+                </span>
+                <span class="file-label">
+                  Choisir des images
+                </span>
+              </span>
+            </label>
+          </div>
+        </div>
+        <div class="control">
+          <ol id="[add-plant]file-labels">
+
+          </ol>
+        </div>
+      </div>
+
+
+      <div class="field is-grouped">
+        <div class="control">
+          <button class="button is-success" type="submit">Ajouter</button>
+        </div>
+        <div class="control">
+          <button class="button is-danger is-light" type="button" onclick="toggleModal('add-plant')">Annuler</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <button class="modal-close is-large" aria-label="close" onclick="toggleModal('add-plant')"></button>
+</div>
+
+<div class="modal" id="add-documentation">
+  <div class="modal-background"></div>
+  <div class="modal-content">
+    <form action="/admin/add-documentation" method="post" enctype="multipart/form-data" onsubmit="if (newDocumentationEditor.value().includes('%suite%') && newDocumentationEditor.value().includes('%section%') && newDocumentationEditor.value().indexOf('%suite%') === newDocumentationEditor.value().lastIndexOf('%suite%')&& newDocumentationEditor.value().includes('%suite-fin%') && newDocumentationEditor.value().indexOf('%suite-fin%') > newDocumentationEditor.value().indexOf('%suite%')) { return true } else { alert('Vous devez avoir au moins une section (%section%) et disposer d\'une seule partie %suite%'); return false }">
+      <div class="field">
+        <div class="label">Plante</div>
+        <div class="control">
+          <div class="select">
+            <select class="is-hovered" name="plant">
+              {% for type in plants_types %}
+              <option value="{{type._id}}">{{type.name}}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <p class="help is-success"><i class="fas fa-info-circle"></i>&nbsp;Quelle plante est concernée par cette documentation ?</p>
+        </div>
+      </div>
+      <div class="field">
+        <div class="label">Type de documentation</div>
+        <div class="control">
+          <div class="select">
+            <select class="is-hovered" name="step">
+              {% for type in documentation_types %}
+              <option value="{{type}}">{{type}}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <p class="help is-success"><i class="fas fa-info-circle"></i>&nbsp;A quelle étape est dédiée cette documentation ?</p>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="label">Titre</div>
+        <div class="control has-icons-left">
+          <input required class="input is-hovered" name="title" type="text" placeholder="Planter des graines d'orchidée">
+          <span class="icon is-small is-left">
+            <i class="fas fa-heading"></i>
+          </span>
+        </div>
+      </div>
+      <div class="field">
+        <div class="label">Contenu</div>
+        <div class="control has-icons-left">
+          <textarea name="content">
+          </textarea>
+        </div>
+      </div>
+      <script>
+          let newDocumentationEditor = new SimpleMDE({
+              element: document.querySelector('#add-documentation textarea'),
+              insertTexts: {
+                  image: ["![Titre de l'image](http://", ")"],
+                  link: ["[Titre du lien", "](http://mon-lien.com)"],
+                  table: ["", "\n\n| Colonne 1 | Colonne 2 | Colonne 3 |\n| -------- | -------- | -------- |\n| Valeur     | Valeur      | Valeur     |\n\n"],
+              },
+              spellChecker: false,
+              placeholder: '# Ceci est un exemple de documentation',
+              toolbar: customToolbar
+          });
+          newDocumentationEditor.value(``)
+      </script>
+      <p class="help is-success"><i class="fas fa-info-circle"></i>&nbsp;La documentation sera séparée en parties / étapes. Pour ajouter une partie, cliquez sur&nbsp;<i class="fas fa-layer-plus"></i> ou écrivez %section%</p>
+      <br>
+      <div class="field is-grouped">
+        <div class="control">
+          <button class="button is-success" type="submit">Ajouter</button>
+        </div>
+        <div class="control">
+          <button class="button is-danger is-light" type="button" onclick="toggleModal('add-documentation')">Annuler</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <button class="modal-close is-large" aria-label="close" onclick="toggleModal('add-documentation')"></button>
+</div>
+
+<div class="modal" id="sell-plant">
+  <div class="modal-background"></div>
+  <div class="modal-content">
+    <form>
+      <div class="field">
+        <div class="label">Plante</div>
+        <div class="control">
+          <div class="select">
+            <select class="is-hovered" id="qrCodePlantType">
+              {% for type in plants_types %}
+              <option value="{{type._id}}">{{type.name}}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <p class="help is-success"><i class="fas fa-info-circle"></i>&nbsp;Quel plante est vendue</p>
+        </div>
+      </div>
+      <div class="field">
+        <div class="label">QR Code</div>
+        <figure class="image is-qr">
+          <img src="/static/assets/no_qr.png" id="generatedQr">
+          <figcaption>Qr code généré</figcaption>
+        </figure>
+      </div>
+      <div class="field is-grouped">
+        <div class="control">
+          <button class="button is-success" type="button" onclick="generateQr()">Générer le qr code</button>
+        </div>
+        <div class="control">
+          <a class="button is-success is-light" type="button" id="downloadQr" download="">Télécharger le qr code</a>
+        </div>
+        <div class="control">
+          <button class="button is-danger is-light" type="button" onclick="toggleModal('sell-plant')">Annuler</button>
+        </div>
+      </div>
+      <p class="help is-danger"><i class="fas fa-info-circle"></i>&nbsp;Le qr code généré est téléchargeable qu'une seule fois !</p>
+    </form>
+  </div>
+  <button class="modal-close is-large" aria-label="close" onclick="toggleModal('sell-plant')"></button>
+</div>
+
+{% for type in plants_types %}
+  {% for doc in documentation_pages[type._id|string] %}
+    <div class="modal" id="{{doc._id}}">
+      <div class="modal-background"></div>
+      <div class="modal-content">
+        <h1 class="title">Modifier la documentation <em>{{doc.title}}</em></h1>
+        <form action="/admin/add-documentation?update=true&doc={{doc._id}}" method="post" enctype="multipart/form-data" onsubmit="if (document.getElementById('{{doc._id}}').querySelector('textarea').value.includes('%suite%') && document.getElementById('{{doc._id}}').querySelector('textarea').value.includes('%section%') && document.getElementById('{{doc._id}}').querySelector('textarea').value.indexOf('%suite%') === document.getElementById('{{doc._id}}').querySelector('textarea').value.lastIndexOf('%suite%') && document.getElementById('{{doc._id}}').querySelector('textarea').value.includes('%suite-fin%') && document.getElementById('{{doc._id}}').querySelector('textarea').value.indexOf('%suite-fin%') > document.getElementById('{{doc._id}}').querySelector('textarea').value.indexOf('%suite%')) { return true } else { alert('Vous devez avoir au moins une section (%section%) et disposer d\'une seule partie %suite%'); return false }">
+          <div class="field">
+            <div class="label">Type de documentation</div>
+            <div class="control">
+              <div class="select">
+                <select class="is-hovered" name="step">
+                  {% for type in documentation_types %}
+                  <option value="{{type}}" {% if type == doc.state %} selected {% endif %} >{{type}}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              <p class="help is-success"><i class="fas fa-info-circle"></i>&nbsp;A quelle étape est dédiée cette documentation ?</p>
+            </div>
+          </div>
+
+          <div class="field">
+            <div class="label">Titre</div>
+            <div class="control has-icons-left">
+              <input required class="input is-hovered" name="title" type="text" placeholder="Planter des graines d'orchidée" value="{{doc.title}}">
+              <span class="icon is-small is-left">
+                <i class="fas fa-heading"></i>
+              </span>
+            </div>
+          </div>
+          <div class="field">
+            <div class="label">Contenu</div>
+            <div class="control has-icons-left">
+                  <textarea name="content">
+                  </textarea>
+            </div>
+          </div>
+          <p class="help is-success"><i class="fas fa-info-circle"></i>&nbsp;La documentation sera séparée en parties / étapes. Pour ajouter une partie, cliquez sur&nbsp;<i class="fas fa-layer-plus"></i> ou écrivez %section%</p>
+          <br>
+          <div class="field is-grouped">
+            <div class="control">
+              <button class="button is-success" type="submit">Sauvegarder</button>
+            </div>
+            <div class="control">
+              <button class="button is-danger is-light" type="button" onclick="toggleModal('{{doc._id}}')">Annuler</button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <button class="modal-close is-large" aria-label="close" onclick="toggleModal('{{doc._id}}')"></button>
+    </div>
+    <script>
+    let modifyDocumentationEditor = new SimpleMDE({
+        element: document.getElementById('{{doc._id}}').querySelector('textarea'),
+        insertTexts: {
+            image: ["![Titre de l'image](http://", ")"],
+            link: ["[Titre du lien", "](http://mon-lien.com)"],
+            table: ["", "\n\n| Colonne 1 | Colonne 2 | Colonne 3 |\n| -------- | -------- | -------- |\n| Valeur     | Valeur      | Valeur     |\n\n"],
+        },
+        spellChecker: false,
+        placeholder: '# Ceci est un exemple de documentation',
+        toolbar: customToolbar
+    });
+    modifyDocumentationEditor.value(`
+{{ doc.content|join('%section%')|safe }}
+%suite%
+{{ doc.next_step_requirements|safe }}
+%suite-fin%`)
+    modifyDocumentationEditor.codemirror.on('change', () => {
+        document.getElementById('{{doc._id}}').querySelector('textarea').value = modifyDocumentationEditor.value()
+    })
+    document.getElementById('{{doc._id}}').querySelector('textarea').value = modifyDocumentationEditor.value()
+</script>
+  {% endfor %}
+{% endfor %}
+
+<script>
+    let plant
+
+    function toggleModal(id) {
+      document.getElementById(id).classList.toggle('is-active')
+    }
+
+
+    function toggleTab(id) {
+        Array.from(document.getElementById(id).children).forEach(el => {
+            el.classList.toggle('is-active')
+            document.getElementById(el.getAttribute('data-target')).classList.toggle('is-hidden')
+        })
+    }
+
+    function showFilesLabel(input, div) {
+        if (input.files.length > 0) {
+            let labels = []
+            for (const file of input.files) {
+                labels.push(`<span class="tag is-success is-light">"${file.name}"</span>`)
+            }
+            div.innerHTML = labels.join('');
+        }
+    }
+
+    async function generateQr() {
+        plant = document.getElementById('qrCodePlantType').value
+        data = await fetch(`/admin/generate-qr?plant=${plant}`)
+            .then(resp => { return resp.blob() })
+            .then(blob => { return URL.createObjectURL(blob) })
+        document.getElementById('generatedQr').src = data
+        document.getElementById('downloadQr').href = data
+        document.getElementById('downloadQr').download = `${document.getElementById('qrCodePlantType').selectedOptions[0].innerText}_qr.png`
+
+    }
+
+</script>
+</body>
+</html>

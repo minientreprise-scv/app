@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Une e-plante, se connecter</title>
+  <link rel="stylesheet" href="/static/css/bulma.min.css">
+  <link rel="stylesheet" href="/static/css/styles.css">
+  <link rel="icon" href="/static/assets/charte/icon.png">
+  <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v5.15.4/css/all.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+</head>
+<body style="background-color: var(--white)">
+<section class="section" style="width: 100vw; height: 100vh; padding: 2em 5em; background-color: rgba(10,10,10,.86); display: flex; flex-direction: column; justify-content: center; align-items: center">
+  <form style="padding: 3em; border-radius: 10px; background-color: var(--white); width: 70%;" action="/admin/login" method="post">
+    <div class="field">
+      <label class="label">Phrase de passe</label>
+      <div class="control has-icons-left">
+        <input class="input is-hovered" type="password" placeholder="*******************" name="passphrase" required>
+        <span class="icon is-small is-left">
+            <i class="fas fa-key"></i>
+          </span>
+      </div>
+      <p class="help is-danger"><i class="fas fa-info-circle"></i>&nbsp;Zone réservée, entrez la phrase de passe.</p>
+    </div>
+    <div class="field">
+      <div class="control has-icons-left">
+        <button class="button is-green">Accéder&nbsp;<i class="fas fa-angle-double-right"></i></button>
+      </div>
+    </div>
+  </form>
+</section>
+</body>
+</html>
