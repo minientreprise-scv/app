@@ -30,7 +30,7 @@ Ils ajoutent aux pots tout le nécessaire pour faire pousser une plante (graines
 #### Elements créés par "Une e-plante"
 
 - Code source: licence [Cecill v2.1](https://github.com/minientreprise-scv/app/blob/main/LICENSE) droits à Brice, Armand et au Collège du Sacré Coeur Vercel.
-- Éléments graphique relatifs à "Une e-plante": licence [CC BY-NC-ND 3.0 FR](https://creativecommons.org/licenses/by-nc-nd/3.0/fr/) par Armand
+- Éléments graphiques relatifs à "Une e-plante": licence [CC BY-NC-ND 3.0 FR](https://creativecommons.org/licenses/by-nc-nd/3.0/fr/) par Armand
 
 ## Documentation
 
