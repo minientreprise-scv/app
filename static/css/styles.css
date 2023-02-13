@@ -236,11 +236,11 @@ strong, b {
 .footer:before {
     content: "";
     position: absolute;
-    background-image: linear-gradient(rgba(0, 0, 0, 0), var(--white));
+    background-image: linear-gradient(rgba(0, 0, 0, 0), var(--white) 50%);
     width: 100vw;
     height: 10%;
     left: 0;
-    transform: translateY(-160%);
+    transform: translateY(-150%);
     z-index: 10000;
 }
 
@@ -405,5 +405,9 @@ table tbody th .tag {
 
     .footer .right {
         flex-direction: column;
+    }
+
+    .footer:before {
+        transform: translateY(-150%);
     }
 }
