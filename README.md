@@ -1,7 +1,7 @@
 
 <div style="text-align: center">
 
-<img alt="Une e-plante bannière" src="https://github.com/minientreprise-scv/app/blob/main/assets/charte/banniere.png?raw=true" width="800">
+<img alt="Une e-plante bannière" src="https://raw.githubusercontent.com/minientreprise-scv/app/main/static/assets/charte/banniere.png" width="800">
 
 # Une e-plante
 [![Flask](https://img.shields.io/pypi/wheel/flask?label=Flask&style=for-the-badge)](https://img.shields.io/pypi/wheel/flask?label=Flask&style=for-the-badge)
