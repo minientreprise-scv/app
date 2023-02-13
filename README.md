@@ -8,6 +8,7 @@
 [![Licence](https://img.shields.io/badge/Licence-CeCill%20v2.1-red?style=for-the-badge)](https://github.com/minientreprise-scv/app/blob/main/LICENSE)
 [![Issues](https://shields.io/github/issues/minientreprise-scv/app?display_name=tag&style=for-the-badge)](https://github.com/minientreprise-scv/app/issues)
 [![Dernier Commit](https://shields.io/github/last-commit/minientreprise-scv/app?display_name=tag&style=for-the-badge)](https://github.com/minientreprise-scv/app/issues)
+[![Commits/mois](https://shields.io/github/commit-activity/m/minientreprise-scv/app?display_name=tag&style=for-the-badge)](https://github.com/minientreprise-scv/app/issues)
 
 Une plante et un qr code pour apprendre à jardiner !
 
