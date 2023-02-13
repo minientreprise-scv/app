@@ -37,7 +37,7 @@ Ils ajoutent aux pots tout le nécessaire pour faire pousser une plante (graines
 #### Dépendances / configuration
 
 - **Python** doit être installé 
-- Les librairies du requirements.txt
+- Les librairies Pypi du requirements.txt aussi
 ```bash
 python3 -m pip install -r requirements.txt 
 ```
