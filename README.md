@@ -11,6 +11,14 @@ Une plante et un qr code pour apprendre à jardiner !
 
 </div>
 
+## Le projet
+
+
+**Une e-plante** est une minientreprise (entreprise à but éducatif) créée par les élèves du [Sacré Cœur de Vercel](https://sacrecoeurvercel.com). 
+Dans une démarche de développement durable les élève ont le projet de recycler des bouteilles en verres, pour en faire des pots de fleurs.
+
+Ils ajoutent aux pots tous le nécessaire pour faire pousser une plante (graines, terreau) ainsi qu'un qr code, qui une fois scanné guidera l'utilisateur pas à pas à faire pousser sa plante !
+
 ## Crédits / licences
 
 #### Elements externes à "Une e-plante"
