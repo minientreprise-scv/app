@@ -71,6 +71,21 @@ class Plants:
             }
         )
 
+    def update_documentation(self, documentation: ObjectId, documentation_type: Documentation, title: str, next_step_requirements: str, content: list):
+        self.db.documentation.update_one(
+            {
+                '_id': documentation
+            },
+            {
+                '$set': {
+                    'state': str(documentation_type),
+                    'title': title,
+                    'next_step_requirements': next_step_requirements,
+                    'content': content
+                }
+            }
+        )
+
     def get_documentation_by_flowers(self):
         documentations = {}
         for flower in self.get_all_types():
