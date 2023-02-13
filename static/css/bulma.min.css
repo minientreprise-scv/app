@@ -554,7 +554,7 @@ a.box:active {
 }
 .button.is-hovered,
 .button:hover {
- border-color:#b5b5b5;
+ border-color:#808080;
  color:#363636
 }
 .button.is-focused,
@@ -644,7 +644,7 @@ fieldset[disabled] .button.is-white {
 }
 .button.is-white.is-inverted.is-hovered,
 .button.is-white.is-inverted:hover {
- background-color:#252525
+ background-color:#808080
 }
 .button.is-white.is-inverted[disabled],
 fieldset[disabled] .button.is-white.is-inverted {
@@ -732,7 +732,7 @@ fieldset[disabled] .button.is-white.is-inverted.is-outlined {
 }
 .button.is-black.is-active,
 .button.is-black:active {
- background-color:#252525;
+ background-color:#808080;
  border-color:transparent;
  color:#fff
 }
@@ -3058,7 +3058,7 @@ a.tag:hover {
 .select select.is-hovered,
 .select select:hover,
 .textarea:hover {
- border-color:#b5b5b5
+ border-color:#808080
 }
 .input:active,
 .input:focus,
@@ -3421,7 +3421,7 @@ fieldset[disabled] .select select:hover {
 }
 .select.is-black select.is-hovered,
 .select.is-black select:hover {
- border-color:#252525
+ border-color:#808080
 }
 .select.is-black select.is-active,
 .select.is-black select.is-focused,
@@ -3641,7 +3641,7 @@ fieldset[disabled] .select select:hover {
 }
 .file.is-black.is-active .file-cta,
 .file.is-black:active .file-cta {
- background-color:#252525;
+ background-color:#808080;
  border-color:transparent;
  color:#fff
 }
@@ -4302,8 +4302,8 @@ fieldset[disabled] .select select:hover {
  pointer-events:none
 }
 .breadcrumb li+li::before {
- color:#b5b5b5;
- content:"\2525252f"
+ color:#808080;
+ content:"\8080802f"
 }
 .breadcrumb ol,
 .breadcrumb ul {
@@ -4342,7 +4342,7 @@ fieldset[disabled] .select select:hover {
  content:"\02022"
 }
 .breadcrumb.has-dot-separator li+li::before {
- content:"\252525b7"
+ content:"\808080b7"
 }
 .breadcrumb.has-succeeds-separator li+li::before {
  content:"\0227B"
@@ -5026,7 +5026,7 @@ button.dropdown-item.is-active {
 .navbar.is-black .navbar-brand>a.navbar-item.is-active,
 .navbar.is-black .navbar-brand>a.navbar-item:focus,
 .navbar.is-black .navbar-brand>a.navbar-item:hover {
- background-color:#252525;
+ background-color:#808080;
  color:#fff
 }
 .navbar.is-black .navbar-brand .navbar-link::after {
@@ -5054,7 +5054,7 @@ button.dropdown-item.is-active {
  .navbar.is-black .navbar-start>a.navbar-item.is-active,
  .navbar.is-black .navbar-start>a.navbar-item:focus,
  .navbar.is-black .navbar-start>a.navbar-item:hover {
-  background-color:#252525;
+  background-color:#808080;
   color:#fff
  }
  .navbar.is-black .navbar-end .navbar-link::after,
@@ -5064,7 +5064,7 @@ button.dropdown-item.is-active {
  .navbar.is-black .navbar-item.has-dropdown.is-active .navbar-link,
  .navbar.is-black .navbar-item.has-dropdown:focus .navbar-link,
  .navbar.is-black .navbar-item.has-dropdown:hover .navbar-link {
-  background-color:#252525;
+  background-color:#808080;
   color:#fff
  }
  .navbar.is-black .navbar-dropdown a.navbar-item.is-active {
@@ -6045,7 +6045,7 @@ a.navbar-item:hover {
 .pagination-link:hover,
 .pagination-next:hover,
 .pagination-previous:hover {
- border-color:#b5b5b5;
+ border-color:#808080;
  color:#363636
 }
 .pagination-link:focus,
@@ -6082,7 +6082,7 @@ a.navbar-item:hover {
  color:#fff
 }
 .pagination-ellipsis {
- color:#b5b5b5;
+ color:#808080;
  pointer-events:none
 }
 .pagination-list {
@@ -6439,7 +6439,7 @@ label.panel-block:hover {
 }
 .tabs.is-toggle a:hover {
  background-color:#f5f5f5;
- border-color:#b5b5b5;
+ border-color:#808080;
  z-index:2
 }
 .tabs.is-toggle li+li {
@@ -8270,7 +8270,7 @@ a.has-text-white:hover {
 }
 a.has-text-black:focus,
 a.has-text-black:hover {
- color:#252525!important
+ color:#808080!important
 }
 .has-background-black {
  background-color:#0a0a0a!important
@@ -8506,10 +8506,10 @@ a.has-text-danger-dark:hover {
  background-color:#7a7a7a!important
 }
 .has-text-grey-light {
- color:#b5b5b5!important
+ color:#808080!important
 }
 .has-background-grey-light {
- background-color:#b5b5b5!important
+ background-color:#808080!important
 }
 .has-text-grey-lighter {
  color:#dbdbdb!important
@@ -9946,7 +9946,7 @@ a.has-text-danger-dark:hover {
 .hero.is-black .navbar-link:hover,
 .hero.is-black a.navbar-item.is-active,
 .hero.is-black a.navbar-item:hover {
- background-color:#252525;
+ background-color:#808080;
  color:#fff
 }
 .hero.is-black .tabs a {
@@ -9977,11 +9977,11 @@ a.has-text-danger-dark:hover {
  color:#0a0a0a
 }
 .hero.is-black.is-bold {
- background-image:linear-gradient(141deg,#252525 0,#0a0a0a 71%,#181616 100%)
+ background-image:linear-gradient(141deg,#808080 0,#0a0a0a 71%,#181616 100%)
 }
 @media screen and (max-width:768px) {
  .hero.is-black.is-bold .navbar-menu {
-  background-image:linear-gradient(141deg,#252525 0,#0a0a0a 71%,#181616 100%)
+  background-image:linear-gradient(141deg,#808080 0,#0a0a0a 71%,#181616 100%)
  }
 }
 .hero.is-light {
