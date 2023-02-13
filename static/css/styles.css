@@ -338,3 +338,72 @@ table tbody th .tag {
     border-radius: 15px;
     height: 100%;
 }
+
+@media (max-width: 1024px) {
+
+    .team, .sponsors {
+        width: 100%;
+    }
+
+
+    .poles {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .section.landing {
+        clip-path: polygon(0 0, 100% 0, 100% 91%, 0 94%);
+    }
+
+    .section.us {
+        clip-path: polygon(0 3%, 100% 1%, 100% 100%, 0% 100%);
+        padding-top: 5em;
+        flex-direction: column;
+    }
+
+    .section.is-divided {
+        flex-direction: column;
+    }
+
+    .section.is-divided .right, .section.is-divided .left {
+        width: 100%;
+    }
+
+    .navbar {
+        padding: .5em;
+    }
+
+    .containers {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .container {
+        height: max-content;
+        transform: scale(0.8);
+        max-width: 27em !important;
+        margin: 0;
+    }
+
+    .container .image img {
+        max-height: 13em;
+    }
+
+    .footer {
+        flex-direction: column;
+        padding-top: 1em;
+    }
+
+    .footer .left, .footer.right {
+        width: 100%;
+    }
+
+    .footer .right {
+        flex-direction: column;
+    }
+}
