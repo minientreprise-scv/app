@@ -138,10 +138,16 @@ def add_plant_to_navigator(sale_id):
     if plant.data is None:
         return 'Aucune plante trouvée... <a href="/scan">Réessayer</a> ou <a href="mailto:armand@camponovo.xyz">nous contacter</a>'
     has_plants, registered_plants = has_registered_plant()
-    if has_plants and sale_id not in registered_plants or not has_plants:
+    if has_plants and sale_id not in registered_plants:
         registered_plants.append(sale_id)
         response = make_response(redirect('/dashboard'))
         response.set_cookie('plants', ','.join(registered_plants), max_age=60 * 60 * 24 * 365 * 2)
+        return response
+    elif sale_id in registered_plants:
+        return redirect('/dashboard')
+    elif not has_plants:
+        response = make_response(redirect('/dashboard'))
+        response.set_cookie('plants', sale_id, max_age=60 * 60 * 24 * 365 * 2)
         return response
     return redirect('/')
 
