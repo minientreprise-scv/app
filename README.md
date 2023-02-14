@@ -29,6 +29,7 @@ Ils ajoutent aux pots tout le nécessaire pour faire pousser une plante (graines
 - [Python](https://www.python.org)
 - [Flask](https://flask.palletsprojects.com/en/2.2.x)
 - [Fontawesome](https://fontawesome.com)
+- [Qr scanner](https://github.com/nimiq/qr-scanner) par Nimiq
 
 #### Elements créés par "Une e-plante"
 
