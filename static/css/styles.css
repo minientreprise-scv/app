@@ -352,6 +352,31 @@ table tbody th .tag {
     height: 100%;
 }
 
+.image.is-qr-scanner {
+    padding-top: 0;
+}
+
+.image.is-qr-scanner video {
+    border-radius: 15px;
+    width: 75vw;
+    height: 75vw;
+    object-fit: cover;
+}
+
+.scan-region-highlight svg, .scan-region-highlight svg path {
+    stroke: var(--light-green) !important;
+    color: var(--light-green) !important;
+}
+
+@media (min-width: 2000px) {
+    .image.is-qr-scanner video {
+        border-radius: 15px;
+        width: 75vw;
+        height: 75vw;
+        object-fit: cover;
+    }
+}
+
 @media (max-width: 1024px) {
 
     .navbar, .navbar-menu {
