@@ -1,6 +1,5 @@
 from main import app
 import uvicorn
-import os
 
 
 if __name__ == '__main__':

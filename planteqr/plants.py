@@ -28,7 +28,7 @@ class Documentation:
 
 
 def saveQr(data, filename, subtitle):
-    logo = Image.open(f'static/assets/charte/qr.png')
+    logo = Image.open('static/assets/charte/qr.png')
     basewidth = 115
     wpercent = (basewidth / float(logo.size[0]))
     hsize = int((float(logo.size[1]) * float(wpercent)))

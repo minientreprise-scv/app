@@ -3,7 +3,6 @@ import locale
 
 import pymongo.database
 import pytz
-from bson import ObjectId
 
 timezone = pytz.timezone('Europe/Paris')
 locale.setlocale(locale.LC_ALL, 'fr_FR.UTF-8')
