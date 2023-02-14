@@ -34,6 +34,11 @@ def accueil():
     return render_template('index.html')
 
 
+@app.route('/scan')
+def scan():
+    return render_template('scan.html')
+
+
 @app.route('/admin/login', methods=['GET', 'POST'])
 def log_administrator():
     if request.method == 'POST':
@@ -131,7 +136,7 @@ def generate_qr():
 def add_plant_to_navigator(sale_id):
     plant = plants.get_plant(sale_id)
     if plant.data is None:
-        return redirect('/')
+        return 'Aucune plante trouvée... <a href="/scan">Réessayer</a> ou <a href="mailto:armand@camponovo.xyz">nous contacter</a>'
     has_plants, registered_plants = has_registered_plant()
     if has_plants and sale_id not in registered_plants or not has_plants:
         registered_plants.append(sale_id)
