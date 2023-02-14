@@ -104,7 +104,7 @@ class Plants:
 
     def generate_qr(self, plant_type_id: ObjectId):
         qr_id = secrets.token_urlsafe(16)
-        hostname = request.host_url
+        hostname = request.host_url.replace('http', 'https')
         plant_name = self.get_type(plant_type_id)['name']
         saveQr(f'{hostname}@{qr_id}', f'{qr_id}.png', f'Plante "{plant_name}" @{qr_id}')
         self.db.qr.insert_one(
