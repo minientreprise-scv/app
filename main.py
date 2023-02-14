@@ -48,7 +48,7 @@ def log_administrator():
             response = make_response(redirect('/admin'))
             response.set_cookie('admin', passphrase)
         else:
-            response = make_response(redirect('/admin/log'))
+            response = make_response(redirect('/admin/login'))
         return response
     return render_template('login.html')
 
@@ -67,7 +67,7 @@ def administration():
         balance_chart_labels = list(balance_by_day.keys())
         balance_chart_datas = [balance_by_day[day] for day in balance_chart_labels]
         return render_template('admin.html', sold=plants_sold_number, types=plants_types_number, documentations=documentations_pages_number, plants_types=list(plants_types), documentation_types=documentation_types, documentation_pages=documentations_pages, expenses=all_expense, expenses_chart=(balance_chart_labels, balance_chart_datas))
-    return redirect('/admin/log')
+    return redirect('/admin/login')
 
 
 @app.route('/admin/add-plant', methods=['POST'])
@@ -87,7 +87,7 @@ def add_plant():
             images_paths.append(path)
         plants.add_type(nom, description, images_paths, slug)
         return redirect('/admin')
-    return redirect('/admin/log')
+    return redirect('/admin/login')
 
 
 @app.route('/admin/add-expense', methods=['POST'])
@@ -98,7 +98,7 @@ def add_expense():
         comment = form['comment']
         expenses.add(float(value), comment)
         return redirect('/admin')
-    return redirect('/admin/log')
+    return redirect('/admin/login')
 
 
 @app.route('/admin/add-documentation', methods=['POST'])
@@ -118,7 +118,7 @@ def add_documentation():
             documentation = ObjectId(request.args.get('doc'))
             plants.update_documentation(documentation, Documentation(step), title, next_step_requirements, sections)
         return redirect('/admin')
-    return redirect('/admin/log')
+    return redirect('/admin/login')
 
 
 @app.route('/admin/generate-qr')
@@ -129,7 +129,7 @@ def generate_qr():
             return {'message': 'Veuillez indiquer une plante'}
         sold_plant = plants.generate_qr(ObjectId(plant))
         return send_file(f'data/qr/{sold_plant.id}.png'), 200
-    return redirect('/admin/log')
+    return redirect('/admin/login')
 
 
 @app.route('/@<sale_id>')
