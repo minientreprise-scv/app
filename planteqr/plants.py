@@ -89,7 +89,7 @@ class Plants:
     def get_documentation_by_flowers(self):
         documentations = {}
         for flower in self.get_all_types():
-            docs = self.db.documentation.find({'plant': flower['_id']})
+            docs = self.db.documentation.find({'plant': flower['_id']}).sort([('$natural', -1)])
             documentations[str(flower['_id'])] = list(docs)
         return documentations
 
