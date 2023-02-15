@@ -6380,7 +6380,7 @@ label.panel-block:hover {
 }
 .tabs ul {
  align-items:center;
- border-bottom-color:#dbdbdb;
+ border-bottom-color:var(--transparent-grey);
  border-bottom-style:solid;
  border-bottom-width:1px;
  display:flex;
@@ -6419,11 +6419,11 @@ label.panel-block:hover {
 }
 .tabs.is-boxed a:hover {
  background-color:#f5f5f5;
- border-bottom-color:#dbdbdb
+ border-bottom-color:var(--transparent-grey)
 }
 .tabs.is-boxed li.is-active a {
- background-color:#fff;
- border-color:#dbdbdb;
+ background-color:var(--white);
+ border-color:var(--transparent-grey);
  border-bottom-color:transparent!important
 }
 .tabs.is-fullwidth li {
