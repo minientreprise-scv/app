@@ -45,7 +45,7 @@ body {
 }
 
 .navbar.has-border-bottom {
-    border-bottom: 2px solid var(--grey);
+    border-bottom: 2px solid var(--transparent-grey);
     margin-bottom: 1em;
 }
 
@@ -320,7 +320,6 @@ strong, b {
 .dropdown-content {
     width: 90%;
     border: 1px solid var(--light-green);
-    box-shadow: 0px 0px 1px var(--light-green);
     margin: auto;
 }
 
