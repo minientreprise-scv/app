@@ -110,6 +110,7 @@ class Plants:
         self.db.qr.insert_one(
             {
                 'plant': plant_type_id,
+                'name': plant_name,
                 'image': f'{qr_id}.png',
                 'sale_id': qr_id,
                 'images': []
@@ -129,6 +130,9 @@ class SoldPlant:
 
     def _update_data(self):
         self.data = self.db.qr.find_one({'sale_id': self.id})
+
+    def change_name(self, name):
+        self.db.qr.update_one({'sale_id': self.id}, {'$set': {'name': name}})
 
     def add_image(self, date: datetime.datetime, image: str):
         images = self.data['images']
