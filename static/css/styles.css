@@ -37,11 +37,16 @@ body {
 }
 
 .subtitle {
-    color: var(--grey);
+    color: var(--transparent-grey);
 }
 
 .navbar {
     padding: .5em 5em .5em .5em;
+}
+
+.navbar.has-border-bottom {
+    border-bottom: 2px solid var(--grey);
+    margin-bottom: 1em;
 }
 
 .navbar-brand img {
@@ -305,6 +310,26 @@ strong, b {
 .select select {
     background-color: var(--white);
     border-radius: 10px;
+}
+
+.dropdown, .dropdown-trigger, .dropdown-menu {
+    width: 100%;
+    background-color: var(--white);
+}
+
+.dropdown-content {
+    width: 90%;
+    border: 1px solid var(--light-green);
+    box-shadow: 0px 0px 1px var(--light-green);
+    margin: auto;
+}
+
+.tabs li.is-active i {
+     color: var(--light-green);
+}
+
+.tabs li.is-active span {
+    color: var(--green);
 }
 
 hr {
