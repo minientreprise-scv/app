@@ -39,6 +39,15 @@ def scan():
     return render_template('scan.html')
 
 
+@app.route('/dashboard')
+def dashboard():
+    has_plants, registered_plants_ids = has_registered_plant()
+    if has_plants:
+        registered_plants = [plants.get_plant(_id).data for _id in registered_plants_ids]
+        return render_template('dashboard.html', plants=registered_plants)
+    return redirect('/scan')
+
+
 @app.route('/admin/login', methods=['GET', 'POST'])
 def log_administrator():
     if request.method == 'POST':
