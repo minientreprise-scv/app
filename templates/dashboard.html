@@ -1,0 +1,115 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Une e-plante, Scanner mon qr</title>
+  <link rel="stylesheet" href="/static/css/bulma.min.css">
+  <link rel="stylesheet" href="/static/css/styles.css">
+  <link rel="icon" href="/static/assets/charte/icon.png">
+  <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v5.15.4/css/all.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<body>
+  <nav class="navbar has-border-bottom" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://minientreprise.sacrecoeurvercel.com">
+        <img src="/static/assets/charte/logo_large.png" height="150">
+      </a>
+
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample" onclick="document.getElementById('mainNavMenu').classList.toggle('is-active'); this.classList.toggle('is-active')">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div class="navbar-menu" id="mainNavMenu">
+      <div class="navbar-end has-text-info">
+        <a href="/" class="navbar-item">Accueil</a>
+        <a href="#features" class="navbar-item">Fonctionnalités</a>
+        <a href="#contact" class="navbar-item">Contact</a>
+        <a href="/scan" class="navbar-item qr">Scanner mon QR&nbsp;<i class="fas fa-qrcode"></i></a>
+        <a href="/dashboard" class="navbar-item dashboard">Mes plantes&nbsp;<i class="fas fa-hand-holding-seedling"></i></a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="has-text-centered">
+    <div class="dropdown is-fullwidth" onclick="this.classList.toggle('is-active')">
+      <div class="dropdown-trigger is-fullwidth">
+        <button class="button">
+          <span>Plante affichée: <span id="plant-name">{{plants[0].name}}</span></span>
+          <span class="icon is-small">
+            <i class="fas fa-angle-down" aria-hidden="true"></i>
+          </span>
+        </button>
+      </div>
+      <div class="dropdown-menu is-fullwidth" role="menu">
+        <div class="dropdown-content">
+          {% for plant in plants %}
+          <div class="dropdown-item">
+            <a href="/dashboard?plant={{plant.id}}">
+              <img class="is-rounded is-cover is-square" height="50" src="{{plant.images[-1]}}">
+              {{plant.name}}
+            </a>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    <br>
+    <br>
+    <div class="tabs is-centered is-fullwidth is-boxed" aria-label="breadcrumbs">
+      <ul>
+        <li data-target="section-learn" class="is-active">
+          <a onclick="changeSection('section-learn')">
+            <span class="icon is-small">
+              <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+            </span>
+            <span>Apprendre</span>
+          </a>
+        </li>
+        <li data-target="section-photos">
+          <a onclick="changeSection('section-photos')">
+            <span class="icon is-small">
+              <i class="fas fa-images" aria-hidden="true"></i>
+            </span>
+            <span>Photos</span>
+          </a>
+        </li>
+        <li data-target="section-other">
+          <a onclick="changeSection('section-other')">
+            <span class="icon is-small">
+              <i class="fas fa-icons" aria-hidden="true"></i>
+            </span>
+            <span>Autres</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </header>
+  <section id="section-learn" class="section">
+    <h1 class="title">Apprendre</h1>
+    {{plants}}
+  </section>
+  <section id="section-photos" class="section is-hidden">
+    <h1 class="title">Mes photos</h1>
+  </section>
+  <section id="section-other" class="section is-hidden">
+    <h1 class="title">Autre</h1>
+  </section>
+
+  <script>
+      const sections = ['section-learn', 'section-photos', 'section-other']
+      function changeSection(section_id) {
+          sections.forEach(id => {
+              document.getElementById(id).classList.add('is-hidden')
+              document.querySelector(`li[data-target=${id}]`).classList.remove('is-active')
+          })
+          document.getElementById(section_id).classList.remove('is-hidden')
+          document.querySelector(`li[data-target=${section_id}`).classList.add('is-active')
+      }
+  </script>
+</body>
+</html>
