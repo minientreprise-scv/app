@@ -361,6 +361,7 @@ table tbody th .tag {
     width: 75vw;
     height: 75vw;
     object-fit: cover;
+    max-height: 50vh;
 }
 
 .scan-region-highlight svg, .scan-region-highlight svg path {
