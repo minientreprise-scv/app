@@ -146,9 +146,10 @@ strong, b {
     margin: auto;
     grid-template-columns: repeat(auto-fit, minmax(32em, 1fr));
     width: 99%;
+    justify-items: center;
 }
 
-.container {
+.containers .container {
     transition: .5s ease-in-out;
     margin: 2em;
     padding: 1.5em;
@@ -163,7 +164,7 @@ strong, b {
     justify-content: start;
 }
 
-.container:hover {
+.containers .container:hover {
     box-shadow: 5px 5px 2px var(--transparent-grey);
 }
 
@@ -382,12 +383,14 @@ strong, b {
 
 .grid {
     display: grid;
+    justify-items: center;
 }
 
 .grid.images {
     grid-template-columns: repeat(auto-fit, minmax(167px, 1fr));
-    width: calc(167px * 2);
+    width: 90%;
     margin: auto;
+    min-width: calc(2 * 167px);
 }
 
 .grid.images .tile {
