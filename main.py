@@ -49,7 +49,7 @@ def dashboard():
         if request.args.get('plant') is None:
             selected = registered_plants[0]
         else:
-            selected = plants.get_plant(request.args.get('plant'))
+            selected = plants.get_plant(request.args.get('plant')).data
             if selected is None:
                 selected = registered_plants[0]
         documentations = plants.get_documentation_by_flowers()[str(selected['plant'])]
@@ -69,6 +69,15 @@ def add_image():
             if selected is None:
                 selected = registered_plants[0]
         return render_template('dashboard.html', plants=registered_plants, selected=selected)
+    return redirect('/dashboard')
+
+
+@app.route('/dashboard/change-name', methods=['POST'])
+def change_name():
+    form = request.form
+    if form.get('plant') is not None:
+        plant = plants.get_plant(form.get('plant')).change_name(form.get('name'))
+        return redirect(f"/dashboard?plant={form.get('plant')}")
     return redirect('/dashboard')
 
 

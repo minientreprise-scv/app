@@ -39,7 +39,7 @@
     <div class="dropdown is-fullwidth" onclick="this.classList.toggle('is-active')">
       <div class="dropdown-trigger is-fullwidth">
         <button class="button">
-          <span>Plante affichée: <span id="plant-name">{{plants[0].name}}</span></span>
+          <span>Plante affichée: <span id="plant-name">{{selected.name}}</span></span>
           <span class="icon is-small">
             <i class="fas fa-angle-down" aria-hidden="true"></i>
           </span>
@@ -49,7 +49,7 @@
         <div class="dropdown-content">
           {% for plant in plants %}
           <div class="dropdown-item">
-            <a href="/dashboard?plant={{plant.id}}">
+            <a href="/dashboard?plant={{plant.sale_id}}" class="has-text-black title is-6">
               <img class="is-rounded is-cover is-square" height="50" src="{{plant.images[-1]}}">
               {{plant.name}}
             </a>
@@ -123,6 +123,23 @@
   </section>
   <section id="section-other" class="section is-hidden">
     <h1 class="title">Autres</h1>
+    <div class="box">
+      <h3 class="title is-4">Modifier le nom de ma plante</h3>
+      <form action="/dashboard/change-name" method="post">
+        <div class="field">
+          <div class="control">
+            <input class="input is-hidden" value="{{selected.sale_id}}" name="plant" required>
+            <input class="input" placeholder="Orchidée salon" value="{{selected.name}}" name="name" required>
+          </div>
+        </div>
+        <div class="field">
+          <div class="control">
+            <button type="submit" class="button is-brown">Sauvegarder&nbsp;<i class="fas fa-save"></i></button>
+          </div>
+        </div>
+      </form>
+
+    </div>
   </section>
 
   <script>
