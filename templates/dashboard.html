@@ -109,7 +109,7 @@
           {{ md_to_html(doc.next_step_requirements)|safe }}
         </section>
         <div class="controls">
-          <button onclick="previousSection('{{doc._id}}')" class="button is-brown" style="border-radius: 4px; padding: calc(.5em - 1px) 1em;"><i class="fas fa-angle-left"></i>&nbsp;Précédant</button>
+          <button onclick="previousSection('{{doc._id}}')" class="button is-brown" style="border-radius: 4px; padding: calc(.5em - 1px) 1em;"><i class="fas fa-angle-left"></i>&nbsp;Précédent</button>
           <button onclick="nextSection('{{doc._id}}')" class="button is-success next">Suivant&nbsp;<i class="fas fa-angle-right"></i></button>
           <button onclick="toggleModal('{{doc._id}}')" class="is-hidden button is-danger is-light end">Fermer&nbsp;<i class="fas fa-times"></i></button>
         </div>
