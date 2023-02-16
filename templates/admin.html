@@ -13,6 +13,10 @@
   <script src="/static/js/custom-toolbar.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 </head>
+<script>
+
+  let modifyDocumentationEditor
+</script>
 <body style="padding: 2em; height: 100vh; overflow: scroll; margin-bottom: 5em;">
 
 <section class="section">
@@ -442,7 +446,7 @@
           <div class="field">
             <div class="label">Contenu</div>
             <div class="control has-icons-left">
-                  <textarea name="content">
+                  <textarea name="content" id="{{doc._id}}textarea">
                   </textarea>
             </div>
           </div>
@@ -461,7 +465,7 @@
       <button class="modal-close is-large" aria-label="close" onclick="toggleModal('{{doc._id}}')"></button>
     </div>
     <script>
-    let modifyDocumentationEditor = new SimpleMDE({
+    modifyDocumentationEditor = new SimpleMDE({
         element: document.getElementById('{{doc._id}}').querySelector('textarea'),
         insertTexts: {
             image: ["![Titre de l'image](http://", ")"],
@@ -477,8 +481,8 @@
 %suite%
 {{ doc.next_step_requirements|safe }}
 %suite-fin%`)
-    modifyDocumentationEditor.codemirror.on('change', () => {
-        document.getElementById('{{doc._id}}').querySelector('textarea').value = modifyDocumentationEditor.value()
+    modifyDocumentationEditor.codemirror.on('change', (instance) => {
+        document.getElementById('{{doc._id}}').querySelector('textarea').value = instance.getValue()
     })
     document.getElementById('{{doc._id}}').querySelector('textarea').value = modifyDocumentationEditor.value()
 </script>
