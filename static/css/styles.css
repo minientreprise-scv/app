@@ -37,7 +37,7 @@ body {
 }
 
 .subtitle {
-    color: var(--transparent-grey);
+    color: var(--grey);
 }
 
 .navbar {
@@ -92,6 +92,19 @@ body {
 
 strong, b {
     font-weight: bold;
+}
+
+.has-no-overflow {
+    max-width: 90vw;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: block;
+    text-align: inherit;
+    white-space: nowrap;
+}
+
+.is-disabled {
+    opacity: 0.6;
 }
 
 .section.is-divided {
@@ -307,6 +320,10 @@ strong, b {
     margin: .5em;
 }
 
+.tag.is-square {
+    width: 2em ;
+}
+
 .select select {
     background-color: var(--white);
     border-radius: 10px;
@@ -329,6 +346,16 @@ strong, b {
 
 .tabs li.is-active span {
     color: var(--green);
+}
+
+.controls {
+    display: flex;
+    justify-content: space-between;
+}
+
+.tag.is-brown.is-light {
+    background-color: rgba(112, 80, 1, 0.56);
+    color: var(--brown);
 }
 
 hr {

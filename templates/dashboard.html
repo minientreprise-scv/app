@@ -91,17 +91,43 @@
   </header>
   <section id="section-learn" class="section">
     <h1 class="title">Apprendre</h1>
-    {{plants}}
+    {% for doc in documentations %}
+    <div class="block box {% if doc.state == 'planter' %}is-disabled{% endif %}" onclick="toggleModal('{{doc._id}}')">
+      <h1 class="subtitle is-6 has-text-black has-no-overflow"><span class="tag is-square is-large {{get_icon_by_state(doc.state)[1]}} is-light"><i class="fas {{get_icon_by_state(doc.state)[0]}}"></i></span>&nbsp;{{doc.title}}</h1>
+    </div>
+    <div class="modal" id="{{doc._id}}" data-current-index="0" data-sections-number="{{doc.content|length+1}}">
+      <div class="modal-background"></div>
+      <div class="modal-content">
+        <h1 class="has-text-grey">{{doc.title}}</h1>
+        {% for section in doc.content %}
+        <section class="content is-hidden" data-index="{{doc.content.index(section)}}">
+          {{ md_to_html(section)|safe }}
+        </section>
+        {% endfor %}
+        <section class="content is-hidden" data-index="{{doc.content|length}}">
+          <h2>Pour la suite</h2>
+          {{ md_to_html(doc.next_step_requirements)|safe }}
+        </section>
+        <div class="controls">
+          <button onclick="previousSection('{{doc._id}}')" class="button is-brown" style="border-radius: 4px; padding: calc(.5em - 1px) 1em;"><i class="fas fa-angle-left"></i>&nbsp;Précédant</button>
+          <button onclick="nextSection('{{doc._id}}')" class="button is-success next">Suivant&nbsp;<i class="fas fa-angle-right"></i></button>
+          <button onclick="toggleModal('{{doc._id}}')" class="is-hidden button is-danger is-light end">Fermer&nbsp;<i class="fas fa-times"></i></button>
+        </div>
+      </div>
+      <button class="modal-close is-large" aria-label="close" onclick="toggleModal('{{doc._id}}')"></button>
+    </div>
+    {% endfor %}
   </section>
   <section id="section-photos" class="section is-hidden">
     <h1 class="title">Mes photos</h1>
   </section>
   <section id="section-other" class="section is-hidden">
-    <h1 class="title">Autre</h1>
+    <h1 class="title">Autres</h1>
   </section>
 
   <script>
       const sections = ['section-learn', 'section-photos', 'section-other']
+      let currentIndex, documentationElement, sectionPages
       function changeSection(section_id) {
           sections.forEach(id => {
               document.getElementById(id).classList.add('is-hidden')
@@ -110,6 +136,66 @@
           document.getElementById(section_id).classList.remove('is-hidden')
           document.querySelector(`li[data-target=${section_id}`).classList.add('is-active')
       }
+
+
+      function showSections(reset=true) {
+          document.querySelectorAll('.modal[data-current-index]').forEach(el => {
+              if (reset) {
+                  currentIndex = 0
+                  sectionPages = el.getAttribute('data-sections-number')
+                  for (let i = 1; i <= sectionPages; i++) {
+                      el.querySelector(`section [data-index='${i - 1}']`).classList.add('is-hidden')
+                  }
+                  el.querySelector(`section [data-index='0']`).classList.remove('is-hidden')
+              } else {
+                  currentIndex = parseInt(el.getAttribute('data-current-index'))
+                  el.querySelector(`section [data-index='${currentIndex}']`).classList.remove('is-hidden')
+              }
+          })
+      }
+      
+      
+      function nextSection(id) {
+          documentationElement = document.getElementById(id)
+          currentIndex = parseInt(documentationElement.getAttribute('data-current-index'))
+          sectionPages = parseInt(documentationElement.getAttribute('data-sections-number'))
+          console.log(sectionPages, currentIndex)
+          for (let i = 1; i <= sectionPages; i++) {
+              documentationElement.querySelector(`section [data-index='${i - 1}']`).classList.add('is-hidden')
+          }
+          if (currentIndex + 2 === sectionPages) {
+              documentationElement.querySelector('.controls .next').classList.add('is-hidden')
+              documentationElement.querySelector('.controls .end').classList.remove('is-hidden')
+          } else {
+              documentationElement.querySelector('.controls .next').classList.remove('is-hidden')
+              documentationElement.querySelector('.controls .end').classList.add('is-hidden')
+          }
+          documentationElement.querySelector(`section [data-index='${currentIndex + 1}']`).classList.remove('is-hidden')
+          documentationElement.setAttribute('data-current-index', `${currentIndex + 1}`)
+      }
+
+      function previousSection(id) {
+          documentationElement = document.getElementById(id)
+          currentIndex = parseInt(documentationElement.getAttribute('data-current-index'))
+          if (currentIndex === 0) {
+              return
+          }
+          sectionPages = parseInt(documentationElement.getAttribute('data-sections-number'))
+          for (let i = 1; i <= sectionPages; i++) {
+              documentationElement.querySelector(`section [data-index='${i - 1}']`).classList.add('is-hidden')
+          }
+          documentationElement.querySelector(`section [data-index='${currentIndex - 1}']`).classList.remove('is-hidden')
+          documentationElement.setAttribute('data-current-index', `${currentIndex - 1}`)
+          documentationElement.querySelector('.controls .next').classList.remove('is-hidden')
+          documentationElement.querySelector('.controls .end').classList.add('is-hidden')
+      }
+
+      function toggleModal(id) {
+          document.getElementById(id).classList.toggle('is-active')
+          showSections(true)
+      }
+
+      showSections()
   </script>
 </body>
 </html>

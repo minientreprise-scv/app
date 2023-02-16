@@ -1,6 +1,8 @@
+import random
 import re
 import secrets
 
+import markdown
 from bson import ObjectId
 from flask import Flask, render_template, make_response, redirect, request, send_file
 from configparser import ConfigParser
@@ -44,8 +46,30 @@ def dashboard():
     has_plants, registered_plants_ids = has_registered_plant()
     if has_plants:
         registered_plants = [plants.get_plant(_id).data for _id in registered_plants_ids]
-        return render_template('dashboard.html', plants=registered_plants)
+        if request.args.get('plant') is None:
+            selected = registered_plants[0]
+        else:
+            selected = plants.get_plant(request.args.get('plant'))
+            if selected is None:
+                selected = registered_plants[0]
+        documentations = plants.get_documentation_by_flowers()[str(selected['plant'])]
+        return render_template('dashboard.html', plants=registered_plants, selected=selected, documentations=documentations)
     return redirect('/scan')
+
+
+@app.route('/dashboard/add-image')
+def add_image():
+    has_plants, registered_plants_ids = has_registered_plant()
+    if has_plants:
+        registered_plants = [plants.get_plant(_id).data for _id in registered_plants_ids]
+        if request.args.get('plant') is None:
+            selected = registered_plants[0]
+        else:
+            selected = plants.get_plant(request.args.get('plant'))
+            if selected is None:
+                selected = registered_plants[0]
+        return render_template('dashboard.html', plants=registered_plants, selected=selected)
+    return redirect('/dashboard')
 
 
 @app.route('/admin/login', methods=['GET', 'POST'])
@@ -166,5 +190,15 @@ def deliver_media(media_type, file):
     return send_file(f'data/{media_type}/{file}')
 
 
+def get_icon_by_state(state):
+    return {'planter': ('fa-hand-holding-seedling', 'is-info'), 'pousser': ('fa-leaf', 'is-success'), 'rempoter': ('fa-shovel', 'is-brown'), 'autre': (random.choice(['fa-wheat', 'fa-rainbow', 'fa-flower', 'fa-flower-tulip', 'fa-flower-daffodil']), 'is-link')}[state]
+
+
+def md_to_html(markdown_content):
+    return markdown.markdown(markdown_content)
+
+
 if __name__ == '__main__':
+    app.jinja_env.globals.update(get_icon_by_state=get_icon_by_state)
+    app.jinja_env.globals.update(md_to_html=md_to_html)
     app.run(host='0.0.0.0', port=8080, debug=True)
