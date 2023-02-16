@@ -58,10 +58,7 @@ body {
 }
 
 .navbar-end .navbar-item.qr, .button.is-green {
-    padding-bottom: calc(.5em - 1px);
-    padding-left: 1em;
-    padding-right: 1em;
-    padding-top: calc(.5em - 1px);
+    padding: calc(.5em - 1px) 1em;
     background-color: var(--green);
     color: var(--white);
     border-radius: .375em;
@@ -70,7 +67,6 @@ body {
 .navbar-end .navbar-item.qr:hover, .button.is-green:hover {
     background-color: var(--light-green) !important;
 }
-
 
 .navbar-end .navbar-item.dashboard, .navbar-end .navbar-item.qr {
     margin-left: 2em;
@@ -210,6 +206,7 @@ strong, b {
     margin: 1em;
     padding: .5em;
     height: max-content;
+    min-height: 14em;
     width: 20em;
     border: 2px solid var(--grey);
     border-radius: 20px;
