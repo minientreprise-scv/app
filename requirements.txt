@@ -5,3 +5,4 @@ uvicorn
 Pillow
 qrcode
 pyc
+markdown

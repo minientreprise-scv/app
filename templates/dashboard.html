@@ -1,0 +1,323 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Une e-plante, Tableau de bord</title>
+  <link rel="stylesheet" href="/static/css/bulma.min.css">
+  <link rel="stylesheet" href="/static/css/styles.css">
+  <link rel="icon" href="/static/assets/charte/icon.png">
+  <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v5.15.4/css/all.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<body>
+  <nav class="navbar has-border-bottom" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://minientreprise.sacrecoeurvercel.com">
+        <img src="/static/assets/charte/logo_large.png" height="150">
+      </a>
+
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample" onclick="document.getElementById('mainNavMenu').classList.toggle('is-active'); this.classList.toggle('is-active')">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div class="navbar-menu" id="mainNavMenu">
+      <div class="navbar-end has-text-info">
+        <a href="/" class="navbar-item">Accueil</a>
+        <a href="#features" class="navbar-item">Fonctionnalités</a>
+        <a href="#contact" class="navbar-item">Contact</a>
+        <a href="/scan" class="navbar-item qr">Scanner mon QR&nbsp;<i class="fas fa-qrcode"></i></a>
+        <a href="/dashboard" class="navbar-item dashboard">Mes plantes&nbsp;<i class="fas fa-hand-holding-seedling"></i></a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="has-text-centered">
+    <div class="dropdown is-fullwidth" onclick="this.classList.toggle('is-active')">
+      <div class="dropdown-trigger is-fullwidth">
+        <button class="button">
+          <span>Plante affichée: <span id="plant-name">{{selected.name}}</span></span>
+          <span class="icon is-small">
+            <i class="fas fa-angle-down" aria-hidden="true"></i>
+          </span>
+        </button>
+      </div>
+      <div class="dropdown-menu is-fullwidth" role="menu">
+        <div class="dropdown-content">
+          {% for plant in plants %}
+          <div class="dropdown-item is-flex is-align-items-center is-justify-content-center" onclick="location.href = '/dashboard?plant={{plant.sale_id}}'">
+            <div class="is-flex is-align-items-center is-justify-content-center">
+              <figure class="image is-48x48">
+                <img class="is-rounded is-cover" height="50" src="{{plant.images[-1].path}}">
+              </figure>
+              <a href="/dashboard?plant={{plant.sale_id}}" class="has-text-black title is-6">
+                &nbsp;&nbsp;{{plant.name}}
+              </a>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    <br>
+    <br>
+    <div class="tabs is-centered is-fullwidth is-boxed" aria-label="breadcrumbs">
+      <ul>
+        <li data-target="section-learn" class="is-active">
+          <a onclick="changeSection('section-learn')">
+            <span class="icon is-small">
+              <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+            </span>
+            <span>Apprendre</span>
+          </a>
+        </li>
+        <li data-target="section-photos">
+          <a onclick="changeSection('section-photos')">
+            <span class="icon is-small">
+              <i class="fas fa-images" aria-hidden="true"></i>
+            </span>
+            <span>Photos</span>
+          </a>
+        </li>
+        <li data-target="section-other">
+          <a onclick="changeSection('section-other')">
+            <span class="icon is-small">
+              <i class="fas fa-icons" aria-hidden="true"></i>
+            </span>
+            <span>Autres</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </header>
+  <section id="section-learn" class="section">
+    <h1 class="title">Apprendre</h1>
+    {% for doc in documentations %}
+    <div class="block box {% if doc.state == 'planter' %}is-disabled{% endif %}" onclick="toggleModal('{{doc._id}}')">
+      <h1 class="subtitle is-6 has-text-black has-no-overflow"><span class="tag is-square is-large {{get_icon_by_state(doc.state)[1]}} is-light"><i class="fas {{get_icon_by_state(doc.state)[0]}}"></i></span>&nbsp;{{doc.title}}</h1>
+    </div>
+    <div class="modal" id="{{doc._id}}" data-current-index="0" data-sections-number="{{doc.content|length+1}}">
+      <div class="modal-background"></div>
+      <div class="modal-content">
+        <h1 class="has-text-grey">{{doc.title}}</h1>
+        {% for section in doc.content %}
+        <section class="content is-hidden" data-index="{{doc.content.index(section)}}">
+          {{ md_to_html(section)|safe }}
+        </section>
+        {% endfor %}
+        <section class="content is-hidden" data-index="{{doc.content|length}}">
+          <h2>Pour la suite</h2>
+          {{ md_to_html(doc.next_step_requirements)|safe }}
+        </section>
+        <div class="controls">
+          <button onclick="previousSection('{{doc._id}}')" class="button is-brown" style="border-radius: 4px; padding: calc(.5em - 1px) 1em;"><i class="fas fa-angle-left"></i>&nbsp;Précédent</button>
+          <button onclick="nextSection('{{doc._id}}')" class="button is-success next">Suivant&nbsp;<i class="fas fa-angle-right"></i></button>
+          <button onclick="toggleModal('{{doc._id}}')" class="is-hidden button is-danger is-light end">Fermer&nbsp;<i class="fas fa-times"></i></button>
+        </div>
+      </div>
+      <button class="modal-close is-large" aria-label="close" onclick="toggleModal('{{doc._id}}')"></button>
+    </div>
+    {% endfor %}
+  </section>
+  <section id="section-photos" class="section is-hidden">
+    <h1 class="title">Mes photos</h1>
+    <div class="modal" id="add-image">
+      <div class="modal-background"></div>
+      <div class="modal-content">
+        <form action="/dashboard/add-image" method="post" enctype="multipart/form-data">
+          <div class="field">
+            <div class="label">Image</div>
+            <div class="control">
+              <div class="file is-boxed has-filename">
+                <label class="file-label">
+                  <input class="file-input" accept="image/png,image/jpeg" type="file" name="photo" onchange="showFileLabel(this, this.parentElement.querySelector('.file-name'))" required>
+                  <span class="file-cta">
+                  <span class="file-icon">
+                    <i class="fas fa-image-polaroid"></i>
+                  </span>
+                  <span class="file-label">
+                    Choisir ou prendre une photo
+                  </span>
+                </span>
+                  <span class="file-name">
+                    Pas de fichier
+                </span>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="field">
+            <div class="control">
+              <input class="input is-hidden" value="{{selected.sale_id}}" name="plant">
+              <button class="button is-success">Téléverser&nbsp;<i class="fas fa-cloud-upload-alt"></i></button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <button class="modal-close is-large" aria-label="close" onclick="toggleModal('add-image')"></button>
+    </div>
+    <div class="modal" id="download-slideshow">
+      <div class="modal-background"></div>
+      <div class="modal-content">
+        <h1 class="title">Télécharger mon diaporama</h1>
+        <figure class="image">
+          <video loop muted id="slideshow"></video>
+          <div class="is-flex is-align-items-center is-justify-content-center is-hidden" id="slideshow-loading" style="position: absolute; width: 100%; height: 100%; transform: translateY(-100%);">
+            <i class="fad fa-spinner-third fa-2x fa-spin"></i>
+          </div>
+        </figure>
+        <div class="field">
+          <div class="control">
+            <button class="button is-success" onclick="downloadSlideshow(this)">Générer le diaporama&nbsp;<i class="fas fa-presentation"></i></button>
+            <p class="help is-success"><i class="fas fa-info-circle"></i>&nbsp;Cette opération peut prendre du temps si vous avez beaucoup de photos...</p>
+          </div>
+        </div>
+        <div class="field">
+          <div class="control">
+            <a class="button is-brown is-light" id="download-slideshow-cta" download="diaporama_plante.mp4">Télécharger&nbsp;<i class="fas fa-cloud-download"></i></a>
+          </div>
+        </div>
+      </div>
+      <button class="modal-close is-large" aria-label="close" onclick="toggleModal('download-slideshow')"></button>
+    </div>
+    <button class="button is-success is-light add is-square" onclick="toggleModal('add-image')"><i class="fas fa-plus fa-2xl"></i></button>
+    <button class="button is-light slideshow is-brown is-square" onclick="toggleModal('download-slideshow')"><i class="fas fa-photo-video fa-2xl"></i></button>
+    <div class="grid images">
+      {% for image in selected.images %}
+      <div class="tile" onclick="toggleModal('{{image.path}}')">
+        <figure class="image is-150x150">
+          <img src="{{image.path}}" class="is-cover is-square" alt="Image de {{selected.name}}">
+        </figure>
+      </div>
+      <div class="modal" id="{{image.path}}">
+        <div class="modal-background"></div>
+        <div class="modal-content">
+          <p class="image">
+            <img src="{{image.path}}" alt="">
+          </p>
+        </div>
+        <button class="modal-close is-large" aria-label="close" onclick="toggleModal('{{image.path}}')"></button>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+  <section id="section-other" class="section is-hidden">
+    <h1 class="title">Autres</h1>
+    <div class="box">
+      <h3 class="title is-4">Modifier le nom de ma plante</h3>
+      <form action="/dashboard/change-name" method="post">
+        <div class="field">
+          <div class="control">
+            <input class="input is-hidden" value="{{selected.sale_id}}" name="plant" required>
+            <input class="input" placeholder="Orchidée salon" value="{{selected.name}}" name="name" required>
+          </div>
+        </div>
+        <div class="field">
+          <div class="control">
+            <button type="submit" class="button is-brown">Sauvegarder&nbsp;<i class="fas fa-save"></i></button>
+          </div>
+        </div>
+      </form>
+
+    </div>
+  </section>
+
+  <script>
+      const sections = ['section-learn', 'section-photos', 'section-other']
+      let currentIndex, documentationElement, sectionPages, data
+      function changeSection(section_id) {
+          sections.forEach(id => {
+              document.getElementById(id).classList.add('is-hidden')
+              document.querySelector(`li[data-target=${id}]`).classList.remove('is-active')
+          })
+          document.getElementById(section_id).classList.remove('is-hidden')
+          document.querySelector(`li[data-target=${section_id}`).classList.add('is-active')
+      }
+
+
+      function showSections(reset=true) {
+          document.querySelectorAll('.modal[data-current-index]').forEach(el => {
+              if (reset) {
+                  currentIndex = 0
+                  sectionPages = el.getAttribute('data-sections-number')
+                  for (let i = 1; i <= sectionPages; i++) {
+                      el.querySelector(`section [data-index='${i - 1}']`).classList.add('is-hidden')
+                  }
+                  el.querySelector(`section [data-index='0']`).classList.remove('is-hidden')
+              } else {
+                  currentIndex = parseInt(el.getAttribute('data-current-index'))
+                  el.querySelector(`section [data-index='${currentIndex}']`).classList.remove('is-hidden')
+              }
+          })
+      }
+      
+      
+      function nextSection(id) {
+          documentationElement = document.getElementById(id)
+          currentIndex = parseInt(documentationElement.getAttribute('data-current-index'))
+          sectionPages = parseInt(documentationElement.getAttribute('data-sections-number'))
+          console.log(sectionPages, currentIndex)
+          for (let i = 1; i <= sectionPages; i++) {
+              documentationElement.querySelector(`section [data-index='${i - 1}']`).classList.add('is-hidden')
+          }
+          if (currentIndex + 2 === sectionPages) {
+              documentationElement.querySelector('.controls .next').classList.add('is-hidden')
+              documentationElement.querySelector('.controls .end').classList.remove('is-hidden')
+          } else {
+              documentationElement.querySelector('.controls .next').classList.remove('is-hidden')
+              documentationElement.querySelector('.controls .end').classList.add('is-hidden')
+          }
+          documentationElement.querySelector(`section [data-index='${currentIndex + 1}']`).classList.remove('is-hidden')
+          documentationElement.setAttribute('data-current-index', `${currentIndex + 1}`)
+      }
+
+      function previousSection(id) {
+          documentationElement = document.getElementById(id)
+          currentIndex = parseInt(documentationElement.getAttribute('data-current-index'))
+          if (currentIndex === 0) {
+              return
+          }
+          sectionPages = parseInt(documentationElement.getAttribute('data-sections-number'))
+          for (let i = 1; i <= sectionPages; i++) {
+              documentationElement.querySelector(`section [data-index='${i - 1}']`).classList.add('is-hidden')
+          }
+          documentationElement.querySelector(`section [data-index='${currentIndex - 1}']`).classList.remove('is-hidden')
+          documentationElement.setAttribute('data-current-index', `${currentIndex - 1}`)
+          documentationElement.querySelector('.controls .next').classList.remove('is-hidden')
+          documentationElement.querySelector('.controls .end').classList.add('is-hidden')
+      }
+
+      function toggleModal(id) {
+          document.getElementById(id).classList.toggle('is-active')
+          showSections(true)
+      }
+
+      function showFileLabel(input, div) {
+          if (input.files.length > 0) {
+              div.innerText = input.files[0].name
+          }
+      }
+
+      async function downloadSlideshow(button) {
+          button.setAttribute('disabled', 'true')
+          document.getElementById('slideshow').src = ''
+          document.getElementById('slideshow-loading').classList.remove('is-hidden')
+          data = await fetch('/dashboard/download-slideshow?plant={{selected.sale_id}}')
+            .then(resp => resp.blob())
+            .then(blob => {
+                return URL.createObjectURL(blob)
+            })
+          document.getElementById('slideshow').src = data
+          document.getElementById('slideshow').play()
+          document.getElementById('download-slideshow-cta').href = data
+          document.getElementById('slideshow-loading').classList.add('is-hidden')
+          button.attributes.removeNamedItem('disabled')
+      }
+
+      showSections()
+  </script>
+</body>
+</html>
