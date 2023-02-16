@@ -1,3 +1,4 @@
+import datetime
 import random
 import re
 import secrets
@@ -57,18 +58,19 @@ def dashboard():
     return redirect('/scan')
 
 
-@app.route('/dashboard/add-image')
+@app.route('/dashboard/add-image', methods=['POST'])
 def add_image():
-    has_plants, registered_plants_ids = has_registered_plant()
-    if has_plants:
-        registered_plants = [plants.get_plant(_id).data for _id in registered_plants_ids]
-        if request.args.get('plant') is None:
-            selected = registered_plants[0]
-        else:
-            selected = plants.get_plant(request.args.get('plant'))
-            if selected is None:
-                selected = registered_plants[0]
-        return render_template('dashboard.html', plants=registered_plants, selected=selected)
+    form = request.form
+    plant = form.get('plant')
+    if plant is not None:
+        image = request.files.get('photo')
+        image_id = secrets.token_urlsafe(16)
+        image_ext = image.filename.split('.')[-1]
+        image_filename = f'{image_id}.{image_ext}'
+        image_path = f'data/images/{image_filename}'
+        image.save(image_path)
+        plants.get_plant(plant).add_image(datetime.datetime.now(), image_path)
+        return redirect(f"/dashboard?plant={plant}")
     return redirect('/dashboard')
 
 
@@ -76,7 +78,7 @@ def add_image():
 def change_name():
     form = request.form
     if form.get('plant') is not None:
-        plant = plants.get_plant(form.get('plant')).change_name(form.get('name'))
+        plants.get_plant(form.get('plant')).change_name(form.get('name'))
         return redirect(f"/dashboard?plant={form.get('plant')}")
     return redirect('/dashboard')
 

@@ -140,4 +140,4 @@ class SoldPlant:
             'path': image,
             'date': date
         })
-        self.db.update_one({'sale_id': self.data['sale_id']}, {'$set': {'images': images}})
+        self.db.qr.update_one({'sale_id': self.data['sale_id']}, {'$set': {'images': images}})

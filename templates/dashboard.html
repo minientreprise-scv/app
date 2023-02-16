@@ -48,11 +48,15 @@
       <div class="dropdown-menu is-fullwidth" role="menu">
         <div class="dropdown-content">
           {% for plant in plants %}
-          <div class="dropdown-item">
-            <a href="/dashboard?plant={{plant.sale_id}}" class="has-text-black title is-6">
-              <img class="is-rounded is-cover is-square" height="50" src="{{plant.images[-1]}}">
-              {{plant.name}}
-            </a>
+          <div class="dropdown-item is-flex is-align-items-center is-justify-content-center" onclick="location.href = '/dashboard?plant={{plant.sale_id}}'">
+            <div class="is-flex is-align-items-center is-justify-content-center">
+              <figure class="image is-48x48">
+                <img class="is-rounded is-cover" height="50" src="{{plant.images[-1].path}}">
+              </figure>
+              <a href="/dashboard?plant={{plant.sale_id}}" class="has-text-black title is-6">
+                &nbsp;&nbsp;{{plant.name}}
+              </a>
+            </div>
           </div>
           {% endfor %}
         </div>
@@ -120,6 +124,60 @@
   </section>
   <section id="section-photos" class="section is-hidden">
     <h1 class="title">Mes photos</h1>
+    <div class="modal" id="add-image">
+      <div class="modal-background"></div>
+      <div class="modal-content">
+        <form action="/dashboard/add-image" method="post" enctype="multipart/form-data">
+          <div class="field">
+            <div class="label">Image</div>
+            <div class="control">
+              <div class="file is-boxed has-filename">
+                <label class="file-label">
+                  <input class="file-input" type="file" name="photo" onchange="showFileLabel(this, this.parentElement.querySelector('.file-name'))" required>
+                  <span class="file-cta">
+                  <span class="file-icon">
+                    <i class="fas fa-image-polaroid"></i>
+                  </span>
+                  <span class="file-label">
+                    Choisir ou prendre une photo
+                  </span>
+                </span>
+                  <span class="file-name">
+                    Pas de fichier
+                </span>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="field">
+            <div class="control">
+              <input class="input is-hidden" value="{{selected.sale_id}}" name="plant">
+              <button class="button is-success">Téléverser&nbsp;<i class="fas fa-cloud-upload-alt"></i></button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <button class="modal-close is-large" aria-label="close" onclick="toggleModal('add-image')"></button>
+    </div>
+    <button class="button is-success is-light add is-square" onclick="toggleModal('add-image')"><i class="fas fa-plus fa-2xl"></i></button>
+    <div class="grid images">
+      {% for image in selected.images %}
+      <div class="tile" onclick="toggleModal('{{image.path}}')">
+        <figure class="image is-150x150">
+          <img src="{{image.path}}" class="is-cover is-square" alt="Image de {{selected.name}}">
+        </figure>
+      </div>
+      <div class="modal" id="{{image.path}}">
+        <div class="modal-background"></div>
+        <div class="modal-content">
+          <p class="image">
+            <img src="{{image.path}}" alt="">
+          </p>
+        </div>
+        <button class="modal-close is-large" aria-label="close" onclick="toggleModal('{{image.path}}')"></button>
+      </div>
+      {% endfor %}
+    </div>
   </section>
   <section id="section-other" class="section is-hidden">
     <h1 class="title">Autres</h1>
@@ -210,6 +268,12 @@
       function toggleModal(id) {
           document.getElementById(id).classList.toggle('is-active')
           showSections(true)
+      }
+
+      function showFileLabel(input, div) {
+          if (input.files.length > 0) {
+              div.innerText = input.files[0].name
+          }
       }
 
       showSections()
