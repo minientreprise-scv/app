@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="/static/css/styles.css">
   <link rel="icon" href="/static/assets/charte/icon.png">
   <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v5.15.4/css/all.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="manifest" href="/static/js/manifest.json">
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 </head>
 <body>
@@ -16,6 +17,8 @@
       <a class="navbar-item" href="https://minientreprise.sacrecoeurvercel.com">
         <img src="/static/assets/charte/logo_large.png" height="150">
       </a>
+
+      <a style="display: none" id="add-to-home-screen" class="navbar-item button is-small is-success is-light is-hidden-desktop">Ajouter à l'écran d'accueil&nbsp;<i class="fas fa-download"></i></a>
 
       <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample" onclick="document.getElementById('mainNavMenu').classList.toggle('is-active'); this.classList.toggle('is-active')">
         <span aria-hidden="true"></span>
@@ -227,7 +230,8 @@
 
   <script>
       const sections = ['section-learn', 'section-photos', 'section-other']
-      let currentIndex, documentationElement, sectionPages, data
+      const A2HSButton = document.getElementById('add-to-home-screen')
+      let currentIndex, documentationElement, sectionPages, data, deferredPrompt
       function changeSection(section_id) {
           sections.forEach(id => {
               document.getElementById(id).classList.add('is-hidden')
@@ -316,6 +320,27 @@
           document.getElementById('slideshow-loading').classList.add('is-hidden')
           button.attributes.removeNamedItem('disabled')
       }
+
+      window.addEventListener("beforeinstallprompt", (e) => {
+          e.preventDefault();
+          deferredPrompt = e;
+          deferredPrompt.prompt()
+          A2HSButton.style = "display: block";
+
+          A2HSButton.addEventListener("click", (e) => {
+              A2HSButton.style = "display: none";
+              deferredPrompt.prompt();
+              deferredPrompt.userChoice.then((choiceResult) => {
+                  if (choiceResult.outcome === "accepted") {
+                      console.log("User accepted the A2HS prompt");
+                  } else {
+                      console.log("User dismissed the A2HS prompt");
+                  }
+                  deferredPrompt = null;
+              });
+          });
+      });
+
 
       showSections()
   </script>
