@@ -1,11 +1,14 @@
 import datetime
+import math
 import secrets
+import random
 
 from PIL import Image, ImageFont, ImageDraw
 from qrcode import QRCode, ERROR_CORRECT_H
 import pymongo.database
 from bson import ObjectId
 from flask import request
+from moviepy.editor import *
 
 
 class Documentation:
@@ -133,6 +136,28 @@ class SoldPlant:
 
     def change_name(self, name):
         self.db.qr.update_one({'sale_id': self.id}, {'$set': {'name': name}})
+
+    def generate_slideshow(self):
+        images_paths = [image['path'] for image in self.data['images']]
+        images_clip = []
+        if len(images_paths) >= 100:
+            print(len(images_paths))
+            duration = 45 / len(images_paths)
+            fps = math.ceil(len(images_paths) / 45)
+        elif len(images_paths) >= 70:
+            duration = 30 / len(images_paths)
+            fps = math.ceil(len(images_paths) / 30)
+        else:
+            duration = 15 / len(images_paths)
+            fps = math.ceil(len(images_paths) / 15)
+        for path in images_paths:
+            slide = ImageClip(path, duration=duration, transparent=True)
+            images_clip.append(slide)
+
+        video = concatenate_videoclips(images_clip, method='compose')
+        audio = AudioFileClip(random.choice(["data/music.mp3", 'data/music1.mp3'])).set_duration(duration * len(images_paths))
+        video.audio = CompositeAudioClip([audio])
+        video.write_videofile(f"data/images/{self.id}.mp4", fps=fps)
 
     def add_image(self, date: datetime.datetime, image: str):
         images = self.data['images']
