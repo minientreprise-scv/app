@@ -53,6 +53,7 @@ def dashboard():
             selected = plants.get_plant(request.args.get('plant')).data
             if selected is None:
                 selected = registered_plants[0]
+        selected['images'].reverse()
         documentations = plants.get_documentation_by_flowers()[str(selected['plant'])]
         return render_template('dashboard.html', plants=registered_plants, selected=selected, documentations=documentations)
     return redirect('/scan')
@@ -71,6 +72,15 @@ def add_image():
         image.save(image_path)
         plants.get_plant(plant).add_image(datetime.datetime.now(), image_path)
         return redirect(f"/dashboard?plant={plant}")
+    return redirect('/dashboard')
+
+
+@app.route('/dashboard/download-slideshow')
+def download_slideshow():
+    plant = request.args.get('plant')
+    if plant is not None:
+        plants.get_plant(plant).generate_slideshow()
+        return send_file(f'data/images/{plant}.mp4')
     return redirect('/dashboard')
 
 

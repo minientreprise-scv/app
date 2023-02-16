@@ -59,10 +59,13 @@ body {
 }
 
 .navbar-end .navbar-item.qr, .button.is-green {
-    padding: .8em;
+    padding-bottom: calc(.5em - 1px);
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-top: calc(.5em - 1px);
     background-color: var(--green);
     color: var(--white);
-    border-radius: 10px;
+    border-radius: .375em;
 }
 
 .navbar-end .navbar-item.qr:hover, .button.is-green:hover {
@@ -76,10 +79,13 @@ body {
 }
 
 .navbar-end .navbar-item.dashboard, .button.is-brown {
-    padding: .8em;
+    padding-bottom: calc(.5em - 1px);
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-top: calc(.5em - 1px);
     background-color: var(--brown);
     color: var(--white);
-    border-radius: 10px;
+    border-radius: .375em;
 }
 
 .navbar-end .navbar-item.dashboard:hover, .button.is-brown:hover {
@@ -340,13 +346,22 @@ strong, b {
 .button.is-square {
     width: 2.5em;
     height: 2.5em;
+    border-radius: 10px;
 }
 
 .button.add {
     position: fixed;
     bottom: 1em;
     right: 1em;
-    z-index: 100;
+    z-index: 10;
+    box-shadow: 0 .5em 1em -.125em rgba(10,10,10,.1),0 0 0 1px rgba(10,10,10,.02);
+}
+
+.button.slideshow {
+    position: fixed;
+    bottom: 1em;
+    left: 1em;
+    z-index: 10;
     box-shadow: 0 .5em 1em -.125em rgba(10,10,10,.1),0 0 0 1px rgba(10,10,10,.02);
 }
 
@@ -411,8 +426,8 @@ strong, b {
     justify-content: space-between;
 }
 
-.tag.is-brown.is-light {
-    background-color: rgba(112, 80, 1, 0.25);
+.tag.is-brown.is-light, .button.is-brown.is-light {
+    background-color: rgb(188, 164, 109);
     color: var(--brown);
 }
 

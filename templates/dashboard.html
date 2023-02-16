@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Une e-plante, Scanner mon qr</title>
+  <title>Une e-plante, Tableau de bord</title>
   <link rel="stylesheet" href="/static/css/bulma.min.css">
   <link rel="stylesheet" href="/static/css/styles.css">
   <link rel="icon" href="/static/assets/charte/icon.png">
@@ -133,7 +133,7 @@
             <div class="control">
               <div class="file is-boxed has-filename">
                 <label class="file-label">
-                  <input class="file-input" type="file" name="photo" onchange="showFileLabel(this, this.parentElement.querySelector('.file-name'))" required>
+                  <input class="file-input" accept="image/png,image/jpeg" type="file" name="photo" onchange="showFileLabel(this, this.parentElement.querySelector('.file-name'))" required>
                   <span class="file-cta">
                   <span class="file-icon">
                     <i class="fas fa-image-polaroid"></i>
@@ -159,7 +159,32 @@
       </div>
       <button class="modal-close is-large" aria-label="close" onclick="toggleModal('add-image')"></button>
     </div>
+    <div class="modal" id="download-slideshow">
+      <div class="modal-background"></div>
+      <div class="modal-content">
+        <h1 class="title">Télécharger mon diaporama</h1>
+        <figure class="image">
+          <video loop muted id="slideshow"></video>
+          <div class="is-flex is-align-items-center is-justify-content-center is-hidden" id="slideshow-loading" style="position: absolute; width: 100%; height: 100%; transform: translateY(-100%);">
+            <i class="fad fa-spinner-third fa-2x fa-spin"></i>
+          </div>
+        </figure>
+        <div class="field">
+          <div class="control">
+            <button class="button is-success" onclick="downloadSlideshow(this)">Générer le diaporama&nbsp;<i class="fas fa-presentation"></i></button>
+            <p class="help is-success"><i class="fas fa-info-circle"></i>&nbsp;Cette opération peut prendre du temps si vous avez beaucoup de photos...</p>
+          </div>
+        </div>
+        <div class="field">
+          <div class="control">
+            <a class="button is-brown is-light" id="download-slideshow-cta" download="diaporama_plante.mp4">Télécharger&nbsp;<i class="fas fa-cloud-download"></i></a>
+          </div>
+        </div>
+      </div>
+      <button class="modal-close is-large" aria-label="close" onclick="toggleModal('download-slideshow')"></button>
+    </div>
     <button class="button is-success is-light add is-square" onclick="toggleModal('add-image')"><i class="fas fa-plus fa-2xl"></i></button>
+    <button class="button is-light slideshow is-brown is-square" onclick="toggleModal('download-slideshow')"><i class="fas fa-photo-video fa-2xl"></i></button>
     <div class="grid images">
       {% for image in selected.images %}
       <div class="tile" onclick="toggleModal('{{image.path}}')">
@@ -202,7 +227,7 @@
 
   <script>
       const sections = ['section-learn', 'section-photos', 'section-other']
-      let currentIndex, documentationElement, sectionPages
+      let currentIndex, documentationElement, sectionPages, data
       function changeSection(section_id) {
           sections.forEach(id => {
               document.getElementById(id).classList.add('is-hidden')
@@ -274,6 +299,22 @@
           if (input.files.length > 0) {
               div.innerText = input.files[0].name
           }
+      }
+
+      async function downloadSlideshow(button) {
+          button.setAttribute('disabled', 'true')
+          document.getElementById('slideshow').src = ''
+          document.getElementById('slideshow-loading').classList.remove('is-hidden')
+          data = await fetch('/dashboard/download-slideshow?plant={{selected.sale_id}}')
+            .then(resp => resp.blob())
+            .then(blob => {
+                return URL.createObjectURL(blob)
+            })
+          document.getElementById('slideshow').src = data
+          document.getElementById('slideshow').play()
+          document.getElementById('download-slideshow-cta').href = data
+          document.getElementById('slideshow-loading').classList.add('is-hidden')
+          button.attributes.removeNamedItem('disabled')
       }
 
       showSections()
