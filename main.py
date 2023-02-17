@@ -211,6 +211,11 @@ def deliver_media(media_type, file):
     return send_file(f'data/{media_type}/{file}')
 
 
+@app.route('/service-worker.js')
+def service_worker():
+    return send_file('static/js/service-worker.js')
+
+
 def get_icon_by_state(state):
     return {'planter': ('fa-hand-holding-seedling', 'is-info'), 'pousser': ('fa-leaf', 'is-success'), 'rempoter': ('fa-shovel', 'is-brown'), 'autre': (random.choice(['fa-wheat', 'fa-rainbow', 'fa-flower', 'fa-flower-tulip', 'fa-flower-daffodil']), 'is-link')}[state]
 

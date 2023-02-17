@@ -67,6 +67,10 @@
     </div>
     <br>
     <br>
+    <div class="notification is-danger is-hidden" id="network-indicator">
+      <i class="fas fa-wifi-slash"></i>&nbsp;Pas de connexion internet
+    </div>
+    <br>
     <div class="tabs is-centered is-fullwidth is-boxed" aria-label="breadcrumbs">
       <ul>
         <li data-target="section-learn" class="is-active">
@@ -224,10 +228,19 @@
           </div>
         </div>
       </form>
-
+    </div>
+    <h1 class="title">Q&R</h1>
+    <div class="content">
+      <blockquote class="is-flex is-justify-content-space-between is-align-items-center" onclick="this.classList.toggle('is-active')">Comment installer l'application ?&nbsp;<i class="fas fa-angle-down"></i></blockquote>
+      <div class="answer content">
+        Si le bouton <a class="navbar-item button is-small is-success is-light" style="display: flex">Ajouter à l'écran d'accueil&nbsp;<i class="fas fa-download"></i></a> est présent en haut de l'écran il faut juste cliquer dessus pour installer l'application.<br>
+        Si ce bouton n'est pas présent, il faut ajouter l'application à l'écran d'accueil manuellement:<br>
+        - Sur Firefox Mobile, il faut aller sur&nbsp;<i class="fas fa-ellipsis-v"></i>&nbsp;&bkarow;&nbsp;"Installer"<br>
+        - Sur les autres navigateurs, comme Safari, allez sur&nbsp;<i class="fas fa-share-alt"></i>&nbsp;ou&nbsp;<i class="fas fa-external-link"></i>&nbsp;(partager)&nbsp;&bkarow;&nbsp;"Ajouter à l'écran d'accueil"<br>
+        - Si un problème persiste, <a href="mailto:armand@camponovo.xyz">contactez nous</a> ou installer un navigateur compatible (Chrome, Samsung Internet, Firefox)
+      </div>
     </div>
   </section>
-
   <script>
       const sections = ['section-learn', 'section-photos', 'section-other']
       const A2HSButton = document.getElementById('add-to-home-screen')
@@ -322,10 +335,8 @@
       }
 
       window.addEventListener("beforeinstallprompt", (e) => {
-          e.preventDefault();
           deferredPrompt = e;
-          deferredPrompt.prompt()
-          A2HSButton.style = "display: block";
+          A2HSButton.style = "";
 
           A2HSButton.addEventListener("click", (e) => {
               A2HSButton.style = "display: none";
@@ -341,6 +352,25 @@
           });
       });
 
+      if ("serviceWorker" in navigator) {
+          navigator.serviceWorker.register("/service-worker.js", { scope: "/" })
+      }
+
+      window.addEventListener('offline', () => {
+          document.getElementById('network-indicator').classList.remove('is-hidden')
+      })
+
+      window.addEventListener('online', () => {
+          document.getElementById('network-indicator').classList.add('is-hidden')
+      })
+
+      window.addEventListener('load', () => {
+          if (!navigator.onLine) {
+              document.getElementById('network-indicator').classList.remove('is-hidden')
+          } else {
+              document.getElementById('network-indicator').classList.add('is-hidden')
+          }
+      })
 
       showSections()
   </script>

@@ -95,6 +95,32 @@ strong, b {
     font-weight: bold;
 }
 
+blockquote {
+    margin-top: .5em;
+}
+
+blockquote .fas {
+    transition: .5s ease-in-out;
+}
+
+blockquote.is-active .fas {
+    transition: .5s ease-in-out;
+    rotate: -90deg;
+}
+
+blockquote + .answer {
+    height: 0px;
+    width: 90%;
+    margin: auto;
+    transition: .5s ease-in-out;
+    overflow: hidden;
+    color: var(--grey);
+}
+
+blockquote.is-active + .answer {
+    height: auto;
+}
+
 .has-no-overflow {
     max-width: 90vw;
     text-overflow: ellipsis;
@@ -243,7 +269,6 @@ strong, b {
     display: flex;
     background-color: var(--white);
 }
-
 
 .footer .left .is-small {
     color: var(--grey);
