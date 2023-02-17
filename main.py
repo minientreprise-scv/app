@@ -216,6 +216,11 @@ def service_worker():
     return send_file('static/js/service-worker.js')
 
 
+@app.route('/robots.txt')
+def robots():
+    return send_file('robots.txt')
+
+
 def get_icon_by_state(state):
     return {'planter': ('fa-hand-holding-seedling', 'is-info'), 'pousser': ('fa-leaf', 'is-success'), 'rempoter': ('fa-shovel', 'is-brown'), 'autre': (random.choice(['fa-wheat', 'fa-rainbow', 'fa-flower', 'fa-flower-tulip', 'fa-flower-daffodil']), 'is-link')}[state]
 
