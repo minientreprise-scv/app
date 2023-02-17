@@ -90,3 +90,12 @@ sh bin/build.sh
 python3 serve.pyc
 ```
 
+#### Docker
+
+L'application peut être lancée via docker.
+
+
+```shell
+docker-compose up [-d]
+```
+-d lancera l'application en `detach` (en arrière-plan)
