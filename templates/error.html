@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Une e-plante, Scanner mon qr</title>
+  <link rel="stylesheet" href="/static/css/bulma.min.css">
+  <link rel="stylesheet" href="/static/css/styles.css">
+  <link rel="icon" href="/static/assets/charte/icon.png">
+  <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v5.15.4/css/all.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<body>
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://minientreprise.sacrecoeurvercel.com">
+        <img src="/static/assets/charte/logo_large.png" height="150">
+      </a>
+
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample" onclick="document.getElementById('mainNavMenu').classList.toggle('is-active'); this.classList.toggle('is-active')">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div class="navbar-menu" id="mainNavMenu">
+      <div class="navbar-end has-text-info">
+        <a href="/" class="navbar-item">Accueil</a>
+        <a href="#features" class="navbar-item">Fonctionnalités</a>
+        <a href="#contact" class="navbar-item">Contact</a>
+        <a href="/scan" class="navbar-item qr">Scanner mon QR&nbsp;<i class="fas fa-qrcode"></i></a>
+        <a href="/dashboard" class="navbar-item dashboard">Mes plantes&nbsp;<i class="fas fa-hand-holding-seedling"></i></a>
+      </div>
+    </div>
+  </nav>
+  <header class="section landing is-medium is-divided" style="clip-path: none; height: 100vh">
+    <div class="left">
+      <div class="section-infos" style="padding-bottom: 5em;">
+        <h1 class="title is-1">Oups</h1>
+        <p class="subtitle is-5">{{message|safe}}</p>
+      </div>
+    </div>
+    <div class="right">
+      <figure class="image">
+        <img src="/static/assets/error.png" alt="Image d'erreur">
+      </figure>
+    </div>
+  </header>
+</body>
+</html>

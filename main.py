@@ -229,6 +229,16 @@ def md_to_html(markdown_content):
     return markdown.markdown(markdown_content)
 
 
+@app.errorhandler(404)
+def not_found(_):
+    return render_template('error.html', message='La page que vous cherchez n\'existe pas... Revenir vers <a href="/">les plantes fleurissantes</a>.')
+
+
+@app.errorhandler(Exception)
+def error(_):
+    return render_template('error.html', message='Une erreur est survenue, veuillez réessayer ou <a href="/#contact">nous contacter</a>.')
+
+
 if __name__ == '__main__':
     app.jinja_env.globals.update(get_icon_by_state=get_icon_by_state)
     app.jinja_env.globals.update(md_to_html=md_to_html)
