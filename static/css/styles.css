@@ -20,6 +20,7 @@
     src: url('/static/assets/charte/police/Livvic-Medium.ttf');
     font-weight: normal;
 }
+
 html {
     background-color: var(--white);
 }
@@ -162,6 +163,7 @@ blockquote.is-active + .answer {
     justify-content: center;
     width: 50%;
 }
+
 .containers {
     display: grid;
     margin: auto;
@@ -258,6 +260,7 @@ blockquote.is-active + .answer {
     opacity: 0.5;
     filter: grayscale(1) blur(1px);
 }
+
 .sponsor:hover {
     opacity: 1;
     filter: grayscale(0) blur(0);
@@ -376,7 +379,7 @@ blockquote.is-active + .answer {
     bottom: 1em;
     right: 1em;
     z-index: 10;
-    box-shadow: 0 .5em 1em -.125em rgba(10,10,10,.1),0 0 0 1px rgba(10,10,10,.02);
+    box-shadow: 0 .5em 1em -.125em rgba(10, 10, 10, .1), 0 0 0 1px rgba(10, 10, 10, .02);
 }
 
 .button.slideshow {
@@ -384,7 +387,7 @@ blockquote.is-active + .answer {
     bottom: 1em;
     left: 1em;
     z-index: 10;
-    box-shadow: 0 .5em 1em -.125em rgba(10,10,10,.1),0 0 0 1px rgba(10,10,10,.02);
+    box-shadow: 0 .5em 1em -.125em rgba(10, 10, 10, .1), 0 0 0 1px rgba(10, 10, 10, .02);
 }
 
 .select select {
@@ -438,7 +441,7 @@ blockquote.is-active + .answer {
 }
 
 .tabs li.is-active i {
-     color: var(--light-green);
+    color: var(--light-green);
 }
 
 .tabs li.is-active span {
