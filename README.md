@@ -40,6 +40,8 @@ Ils ajoutent aux pots tout le nécessaire pour faire pousser une plante (graines
 
 #### Dépendances / configuration ⚙️
 
+> Pour certaines installations de python, il n'est pas néccéssaire d'insérer le `3` après `python` (ex: `python -m pip...`)
+
 - **Python** doit être installé 
 - Les librairies Pypi du requirements.txt aussi
 ```bash
@@ -82,23 +84,8 @@ sh bin/build.sh
 ```
 Windows 🪟
 ```shell
-python -m py_compile bin\production.py
+.\bin\build.bat
 ```
-
-```shell
-move bin\__pycache__\[fichier-généré] serve.pyc
-```
-
-// Développement d'un fichier bat en cour...
-
-[//]: # (ou)
-
-[//]: # ()
-[//]: # (```)
-
-[//]: # (bin/build.bat)
-
-[//]: # (```)
 
 2. **Lancer le programme compilé**
 
