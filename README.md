@@ -38,9 +38,9 @@ Ils ajoutent aux pots tout le nécessaire pour faire pousser une plante (graines
 
 ## Documentation 📘
 
-#### Dépendances / configuration ⚙️
-
 > Pour certaines installations de python, il n'est pas néccéssaire d'insérer le `3` après `python` (ex: `python -m pip...`)
+
+#### Dépendances / configuration ⚙️
 
 - **Python** doit être installé 
 - Les librairies Pypi du requirements.txt aussi
