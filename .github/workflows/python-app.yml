@@ -46,10 +46,10 @@ jobs:
 
     - name: Perform python unit-tests and test run
       env:
-        configuration: ${{ secrets.CONFIGURATION }}
+        CONFIGURATION: ${{ secrets.CONFIGURATION }}
       run: |
         # Write a default configuration
         touch config.ini
-        echo $configuration > config.ini
+        echo "$CONFIGURATION" > config.ini
         # Perform unit tests and run program
         python3 _unit_tests.py
