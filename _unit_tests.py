@@ -61,5 +61,6 @@ if __name__ == '__main__':
 
     if error:
         print('\n\n\033[1m\033[91mUnit tests finished with errors ❌\033[0m')
+        exit(1)
     else:
         print('\n\n\033[1m\033[92mAll tests have been passed !\033[0m')
