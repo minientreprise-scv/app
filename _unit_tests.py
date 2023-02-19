@@ -34,7 +34,7 @@ def perform_unit_tests(tests):
 def perform_test_run():
     global error
     try:
-        subprocess.check_call(["python3", "serve.pyc"], timeout=15)
+        subprocess.check_call(["python3", "serve.pyc"], timeout=15, stdout=subprocess.DEVNULL)
         print('\033[92mTest run ended successfully\033[0m')
     except subprocess.TimeoutExpired:
         print('\033[92mTest run ended successfully\033[0m')
@@ -47,6 +47,8 @@ if __name__ == '__main__':
     config = ConfigParser()
     try:
         config.read('config.ini')
+        if not 'mongodb.net' in config or not 'administration' in config:
+            raise IndexError('Config.ini does not contain required field')
     except Exception:
         raise FileNotFoundError('Missing config.ini as described in README.md')
     print("\033[92mLoading configuration ✔\033[0m")
@@ -55,7 +57,7 @@ if __name__ == '__main__':
 
     perform_unit_tests([(test_db, 'Database'), (test_templates, 'Jinja Templates (HTML)')])
 
-    print('\033[1mUnit tests ended successfully; now performing a test-run \033[0m')
+    print('\033[1mUnit tests ended; now performing a test-run \033[0m')
 
     perform_test_run()
 
