@@ -333,6 +333,10 @@
           document.getElementById('slideshow-loading').classList.add('is-hidden')
           button.attributes.removeNamedItem('disabled')
       }
+      
+      function firstLoad(doc) {
+          toggleModal(doc)
+      }
 
       window.addEventListener("beforeinstallprompt", (e) => {
           deferredPrompt = e;
@@ -373,6 +377,7 @@
       })
 
       showSections()
+      {{onload|safe}}
   </script>
 </body>
 </html>

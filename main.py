@@ -55,7 +55,16 @@ def dashboard():
                 selected = registered_plants[0]
         selected['images'].reverse()
         documentations = plants.get_documentation_by_flowers()[str(selected['plant'])]
-        return render_template('dashboard.html', plants=registered_plants, selected=selected, documentations=documentations)
+        onload = ''
+        if request.args.get('show-doc-plant') is not None:
+            documentation_plant = None
+            for doc in documentations:
+                if doc['state'] == Documentation.plant:
+                    documentation_plant = doc
+                    break
+            documentation_plant['content'].insert(0, """## Bienvenue sur une e-plante !\n\nEn parcourant ces premières pages vous planterez une plante avec votre kit.\n> Cliquez sur suivant pour commencer l'aventure""")
+            onload = f"firstLoad('{documentation_plant['_id']}')"
+        return render_template('dashboard.html', plants=registered_plants, selected=selected, documentations=documentations, onload=onload)
     return redirect('/scan')
 
 
@@ -194,13 +203,13 @@ def add_plant_to_navigator(sale_id):
     has_plants, registered_plants = has_registered_plant()
     if has_plants and sale_id not in registered_plants:
         registered_plants.append(sale_id)
-        response = make_response(redirect('/dashboard'))
+        response = make_response(redirect(f'/dashboard?show-doc-plant=true&plant={sale_id}'))
         response.set_cookie('plants', ','.join(registered_plants), max_age=60 * 60 * 24 * 365 * 2)
         return response
     elif sale_id in registered_plants:
         return redirect('/dashboard')
     elif not has_plants:
-        response = make_response(redirect('/dashboard'))
+        response = make_response(redirect(f'/dashboard?show-doc-plant=true&plant={sale_id}'))
         response.set_cookie('plants', sale_id, max_age=60 * 60 * 24 * 365 * 2)
         return response
     return redirect('/')

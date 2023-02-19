@@ -93,6 +93,11 @@ strong, b {
     font-weight: bold;
 }
 
+.content blockquote {
+    background-color: var(--transparent-grey);
+    border-color: var(--grey);
+}
+
 blockquote {
     margin-top: .5em;
 }
