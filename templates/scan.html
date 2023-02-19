@@ -1,76 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Une e-plante, Scanner mon qr</title>
-  <link rel="stylesheet" href="/static/css/bulma.min.css">
-  <link rel="stylesheet" href="/static/css/styles.css">
-  <link rel="icon" href="/static/assets/charte/icon.png">
-  <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v5.15.4/css/all.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-</head>
-<body>
-  <nav class="navbar" role="navigation" aria-label="main navigation">
-    <div class="navbar-brand">
-      <a class="navbar-item" href="https://minientreprise.sacrecoeurvercel.com">
-        <img src="/static/assets/charte/logo_large.png" height="150">
-      </a>
+{% extends "navbar.html" %}
 
-      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample" onclick="document.getElementById('mainNavMenu').classList.toggle('is-active'); this.classList.toggle('is-active')">
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-      </a>
-    </div>
+{% block title %}Une e-plante, Scanner mon qr{% endblock %}
 
-    <div class="navbar-menu" id="mainNavMenu">
-      <div class="navbar-end has-text-info">
-        <a href="/" class="navbar-item">Accueil</a>
-        <a href="#features" class="navbar-item">Fonctionnalités</a>
-        <a href="#contact" class="navbar-item">Contact</a>
-        <a href="/scan" class="navbar-item qr">Scanner mon QR&nbsp;<i class="fas fa-qrcode"></i></a>
-        <a href="/dashboard" class="navbar-item dashboard">Mes plantes&nbsp;<i class="fas fa-hand-holding-seedling"></i></a>
-      </div>
+{% block content %}
+
+<header class="section landing is-medium is-divided" style="clip-path: none">
+  <div class="left">
+    <div class="section-infos" style="padding-bottom: 5em;">
+      <h1 class="title is-1">Scanner mon Qr code</h1>
+      <p class="subtitle is-5">Si un problème persiste (qr code erroné, pas de caméra), veuillez entrer l'identifiant présent sous le qr code (@...) si-dessous.<br>Veillez à bien autoriser la caméra arrière pour scanner le qr.</p>
+      <p class="subtitle is-5">
+        <div class="field">
+          <div class="control has-icons-left">
+            <input class="input" placeholder="luyEzGflieygzef_gd-hPI" name="plant-id">
+            <span class="icon is-left">
+              <i class="fas fa-at"></i>
+            </span>
+          </div>
+        </div>
+        <div class="field">
+          <div class="control has-icons-left">
+            <button class="button is-success" onclick="location.href = '/@' + document.querySelector('input[name=plant-id]').value">Enregistrer ma plante</button>
+          </div>
+        </div>
+      </p>
     </div>
-  </nav>
-  <header class="section landing is-medium is-divided" style="clip-path: none">
-    <div class="left">
-      <div class="section-infos" style="padding-bottom: 5em;">
-        <h1 class="title is-1">Scanner mon Qr code</h1>
-        <p class="subtitle is-5">Si un problème persiste (qr code erroné, pas de caméra), veuillez entrer l'identifiant présent sous le qr code (@...) si-dessous.<br>Veillez à bien autoriser la caméra arrière pour scanner le qr.</p>
-        <p class="subtitle is-5">
-          <div class="field">
-            <div class="control has-icons-left">
-              <input class="input" placeholder="luyEzGflieygzef_gd-hPI" name="plant-id">
-              <span class="icon is-left">
-                <i class="fas fa-at"></i>
-              </span>
-            </div>
-          </div>
-          <div class="field">
-            <div class="control has-icons-left">
-              <button class="button is-success" onclick="location.href = '/@' + document.querySelector('input[name=plant-id]').value">Enregistrer ma plante</button>
-            </div>
-          </div>
-        </p>
-      </div>
-    </div>
-    <div class="right">
-      <figure class="image is-1by1 is-qr-scanner">
-        <video class="image" id="camera-render"></video>
-      </figure>
-      <br>
-      <br>
-      <div class="field is-grouped">
-        <div class="control">
-          <div class="select">
-            <select id="cam-list"></select>
-          </div>
+  </div>
+  <div class="right">
+    <figure class="image is-1by1 is-qr-scanner">
+      <video class="image" id="camera-render"></video>
+    </figure>
+    <br>
+    <br>
+    <div class="field is-grouped">
+      <div class="control">
+        <div class="select">
+          <select id="cam-list"></select>
         </div>
       </div>
     </div>
-  </header>
-  <script type="module">
+  </div>
+</header>
+<script type="module">
       import QrScanner from "/static/js/qr-scanner.min.js";
       const camList = document.getElementById('cam-list')
       const qrScanner = new QrScanner(
@@ -102,5 +73,5 @@
           qrScanner.setCamera(event.target.value)
       });
   </script>
-</body>
-</html>
+
+{% endblock %}

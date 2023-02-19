@@ -1,0 +1,36 @@
+{% extends "default.html" %}
+
+{% block title %}{% endblock %}
+{% block imports %}{% endblock %}
+
+{% block body %}
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="https://minientreprise.sacrecoeurvercel.com">
+      <img height="150" alt="Logo">
+    </a>
+
+    <a href="/scan" class="navbar-item button is-success is-hidden-desktop">Scanner mon QR&nbsp;<i class="fas fa-qrcode"></i></a>
+
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample" onclick="document.getElementById('mainNavMenu').classList.toggle('is-active'); this.classList.toggle('is-active')">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+
+  <div class="navbar-menu" id="mainNavMenu">
+    <div class="navbar-end has-text-info">
+      <a href="/" class="navbar-item">Accueil</a>
+      <a href="/#features" class="navbar-item">Fonctionnalités</a>
+      <a href="/#contact" class="navbar-item">Contact</a>
+      <a href="/scan" class="navbar-item qr">Scanner mon QR&nbsp;<i class="fas fa-qrcode"></i></a>
+      <a href="/dashboard" class="navbar-item dashboard">Mes plantes&nbsp;<i class="fas fa-hand-holding-seedling"></i></a>
+    </div>
+  </div>
+</nav>
+
+{% block content %}{% endblock %}
+
+{% endblock %}

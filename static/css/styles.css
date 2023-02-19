@@ -75,10 +75,7 @@ body {
 }
 
 .navbar-end .navbar-item.dashboard, .button.is-brown {
-    padding-bottom: calc(.5em - 1px);
-    padding-left: 1em;
-    padding-right: 1em;
-    padding-top: calc(.5em - 1px);
+    padding: calc(.5em - 1px) 1em;
     background-color: var(--brown);
     color: var(--white);
     border-radius: .375em;
@@ -110,7 +107,7 @@ blockquote.is-active .fas {
 }
 
 blockquote + .answer {
-    height: 0px;
+    height: 0;
     width: 90%;
     margin: auto;
     transition: .5s ease-in-out;

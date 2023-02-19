@@ -164,7 +164,7 @@ def add_documentation():
         content = form['content']
         sections = content.split('%section%')
         sections[-1] = sections[-1].split('%suite%')[0]
-        next_step_requirements = re.search('%suite%([\s\S]*?)%suite-fin%', content).group().replace('%suite%', '').replace('%suite-fin%', '')
+        next_step_requirements = re.search('%suite%([\\s\\S]*?)%suite-fin%', content).group().replace('%suite%', '').replace('%suite-fin%', '')
         if request.args.get('update') is None:
             plant = form['plant']
             plants.add_documentation(ObjectId(plant), Documentation(step), title, next_step_requirements, sections)

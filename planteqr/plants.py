@@ -17,10 +17,10 @@ class Documentation:
     repot = 'rempoter'
     other = 'autre'
 
-    def __init__(self, type):
-        if type not in self.all_types():
+    def __init__(self, documentation_type):
+        if documentation_type not in self.all_types():
             raise NotImplementedError('This documentation type is not valid !')
-        self.type = type
+        self.type = documentation_type
 
     @staticmethod
     def all_types():
@@ -32,10 +32,10 @@ class Documentation:
 
 def saveQr(data, filename, subtitle):
     logo = Image.open('static/assets/charte/qr.png')
-    basewidth = 115
-    wpercent = (basewidth / float(logo.size[0]))
-    hsize = int((float(logo.size[1]) * float(wpercent)))
-    logo = logo.resize((basewidth, hsize))
+    base_width = 115
+    width_percent = (base_width / float(logo.size[0]))
+    hsize = int((float(logo.size[1]) * float(width_percent)))
+    logo = logo.resize((base_width, hsize))
     font = ImageFont.truetype('static/assets/charte/police/Livvic-Medium.ttf', 16)
     qr = QRCode(error_correction=ERROR_CORRECT_H)
     qr.add_data(data)

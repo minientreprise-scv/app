@@ -160,24 +160,6 @@
           const datas = {{expenses_chart[1]|safe}}
           const ctx = document.getElementById('financesGraph');
 
-
-          const config = {
-              type: 'line',
-              data: datas,
-              options: {
-                  responsive: true,
-                  plugins: {
-                      legend: {
-                          position: 'top',
-                      },
-                      title: {
-                          display: true,
-                          text: 'Solde de la minientreprise en fonction des jours'
-                      }
-                  }
-              },
-          }
-
           new Chart(ctx, {
               type: 'line',
               data: {
@@ -392,7 +374,7 @@
       <div class="field">
         <div class="label">QR Code</div>
         <figure class="image is-qr">
-          <img src="/static/assets/no_qr.png" id="generatedQr">
+          <img src="/static/assets/no_qr.png" id="generatedQr" alt="Qr code généré">
           <figcaption>Qr code généré</figcaption>
         </figure>
       </div>
