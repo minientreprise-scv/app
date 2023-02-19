@@ -5,7 +5,11 @@ import pymongo.database
 import pytz
 
 timezone = pytz.timezone('Europe/Paris')
-locale.setlocale(locale.LC_ALL, 'fr_FR.UTF-8')
+
+try:
+    locale.setlocale(locale.LC_ALL, 'fr_FR.UTF-8')
+except:
+    print('Error while setting up locale...')
 
 
 class Expenses:
