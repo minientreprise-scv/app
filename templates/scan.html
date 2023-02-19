@@ -4,44 +4,44 @@
 
 {% block content %}
 
-  <header class="section landing is-medium is-divided" style="clip-path: none">
-    <div class="left">
-      <div class="section-infos" style="padding-bottom: 5em;">
-        <h1 class="title is-1">Scanner mon Qr code</h1>
-        <p class="subtitle is-5">Si un problème persiste (qr code erroné, pas de caméra), veuillez entrer l'identifiant présent sous le qr code (@...) si-dessous.<br>Veillez à bien autoriser la caméra arrière pour scanner le qr.</p>
-        <p class="subtitle is-5">
-          <div class="field">
-            <div class="control has-icons-left">
-              <input class="input" placeholder="luyEzGflieygzef_gd-hPI" name="plant-id">
-              <span class="icon is-left">
-                <i class="fas fa-at"></i>
-              </span>
-            </div>
+<header class="section landing is-medium is-divided" style="clip-path: none">
+  <div class="left">
+    <div class="section-infos" style="padding-bottom: 5em;">
+      <h1 class="title is-1">Scanner mon Qr code</h1>
+      <p class="subtitle is-5">Si un problème persiste (qr code erroné, pas de caméra), veuillez entrer l'identifiant présent sous le qr code (@...) si-dessous.<br>Veillez à bien autoriser la caméra arrière pour scanner le qr.</p>
+      <p class="subtitle is-5">
+        <div class="field">
+          <div class="control has-icons-left">
+            <input class="input" placeholder="luyEzGflieygzef_gd-hPI" name="plant-id">
+            <span class="icon is-left">
+              <i class="fas fa-at"></i>
+            </span>
           </div>
-          <div class="field">
-            <div class="control has-icons-left">
-              <button class="button is-success" onclick="location.href = '/@' + document.querySelector('input[name=plant-id]').value">Enregistrer ma plante</button>
-            </div>
+        </div>
+        <div class="field">
+          <div class="control has-icons-left">
+            <button class="button is-success" onclick="location.href = '/@' + document.querySelector('input[name=plant-id]').value">Enregistrer ma plante</button>
           </div>
-        </p>
-      </div>
+        </div>
+      </p>
     </div>
-    <div class="right">
-      <figure class="image is-1by1 is-qr-scanner">
-        <video class="image" id="camera-render"></video>
-      </figure>
-      <br>
-      <br>
-      <div class="field is-grouped">
-        <div class="control">
-          <div class="select">
-            <select id="cam-list"></select>
-          </div>
+  </div>
+  <div class="right">
+    <figure class="image is-1by1 is-qr-scanner">
+      <video class="image" id="camera-render"></video>
+    </figure>
+    <br>
+    <br>
+    <div class="field is-grouped">
+      <div class="control">
+        <div class="select">
+          <select id="cam-list"></select>
         </div>
       </div>
     </div>
-  </header>
-  <script type="module">
+  </div>
+</header>
+<script type="module">
       import QrScanner from "/static/js/qr-scanner.min.js";
       const camList = document.getElementById('cam-list')
       const qrScanner = new QrScanner(
