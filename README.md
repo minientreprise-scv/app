@@ -58,9 +58,10 @@ mongo_password=
 passphrases=superpassphraseforadministrat%%r1,anothoeradministartor's p4ssphr4se
 ```
 
+> Pour vérifier si l'application peut démarrer, il faut exécuter le script `_unit_tests.py`. 
+> Il indiquera si la configuration actuelle permet de démarrer le service. 
+
 Tout est prêt, l'application peut démarrer
-
-
 
 #### Lancement de l'application - Mode développement 🚧
 
