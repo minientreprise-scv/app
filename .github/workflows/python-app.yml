@@ -16,6 +16,7 @@ jobs:
   check:
 
     runs-on: ubuntu-latest
+    environment: "Workflow: tests"
 
     steps:
     - uses: actions/checkout@v3
