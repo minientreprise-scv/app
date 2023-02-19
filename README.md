@@ -33,12 +33,12 @@ Ils ajoutent aux pots tout le nécessaire pour faire pousser une plante (graines
 
 #### Elements créés par "Une e-plante"
 
-- Code source: licence [Cecill v2.1](https://github.com/minientreprise-scv/app/blob/main/LICENSE) droits à Brice, Armand et au Collège du Sacré Coeur Vercel.
+- Code source: licence [Cecill v2.1](https://github.com/minientreprise-scv/app/blob/main/LICENSE) droits à Brice, Armand et au Collège du Sacré Cœur Vercel.
 - Éléments graphiques relatifs à "Une e-plante": licence [CC BY-NC-ND 3.0 FR](https://creativecommons.org/licenses/by-nc-nd/3.0/fr/) par Armand
 
 ## Documentation 📘
 
-> Pour certaines installations de python, il n'est pas néccéssaire d'insérer le `3` après `python` (ex: `python -m pip...`)
+> Pour certaines installations de python, il n'est pas nécessaire d'insérer le `3` après `python` (ex: `python -m pip...`)
 
 #### Dépendances / configuration ⚙️
 
