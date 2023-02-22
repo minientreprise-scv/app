@@ -2,6 +2,11 @@
 
 {% block title %}Une e-plante, La plante qui vous apprend à jardiner{% endblock %}
 
+{% block imports %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.3/dist/css/bulma-carousel.min.css">
+<script src="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.3/dist/js/bulma-carousel.min.js"></script>
+{% endblock %}
+
 {% block content %}
 
 <header class="section landing is-medium is-divided">
@@ -10,7 +15,8 @@
       <h1 class="title is-1">Une e-plante</h1>
       <p class="subtitle is-5">La plante qui vous apprend à jardiner !</p>
       <p class="subtitle is-5">
-        <b>Une e-plante</b> est une <a href="https://www.entreprendre-pour-apprendre.fr" target="_blank">Mini-entreprise&reg;</a> créée par le collège du <a href="https://sacrecoeurvercel.com" target="_blank">Sacré Cœur Vercel</a>.
+        <b>Une e-plante</b> est une <a href="https://www.entreprendre-pour-apprendre.fr" target="_blank">Mini-entreprise&reg;</a>
+        créée par le collège du <a href="https://sacrecoeurvercel.com" target="_blank">Sacré Cœur Vercel</a>.
         <br>
         Nous <b>recyclons</b> des bouteilles en verre, et nous vous apprenons à jardiner !
       </p>
@@ -22,42 +28,123 @@
   </div>
 </header>
 <section class="section features has-text-centered" id="features">
+  <h1 class="title is-2">Comment ça marche ?</h1>
+  <section class="section">
+    <div class="container is-carousel-ancestor">
+      <div id="carousel-images" class="carousel">
+        <div class="card">
+          <div class="card-image">
+            <figure class="image is-16by9 is-covered">
+              <img src="/static/assets/mockup_paquet.jpg" alt="Paquet">
+            </figure>
+          </div>
+          <div class="card-content">
+            <div class="title is-4">
+              1 - Achetez votre kit
+            </div>
+            <div class="subtitle">
+              Achetez votre kit dans un magasin référencé ou sur notre site internet en ligne et recevez-le.
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-image">
+            <figure class="image is-16by9 is-covered">
+              <img src="/static/assets/mockup_scan.jpg" class="is-mockup-scan" alt="Scanner mon Qr code">
+            </figure>
+          </div>
+          <div class="card-content">
+            <div class="title is-4">
+              2 - Scanner votre QR code
+            </div>
+            <div class="subtitle">
+              Une fois votre kit reçu, déballez le et scannez le qr code présent à l'intérieur (depuis votre appareil
+              photo ou sur <a href="/scan" target="_blank">notre page dédiée</a>).
+              Vous serez redirigés vers votre tableau de bord.
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-image">
+            <figure class="image is-16by9 is-covered">
+              <img src="/static/assets/mockup_apprendre.jpg" alt="Apprendre grace à l'application">
+            </figure>
+          </div>
+          <div class="card-content">
+            <div class="title is-4">
+              3 - Apprenez
+            </div>
+            <div class="subtitle">
+              Désormais sur votre tableau de bord, vous avez accès à toutes les documentations relatives à votre plante.
+              Si vous possédez plusieurs plantes, vous pourrez choisir laquelle afficher sur votre tableau de bord.
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-image">
+            <figure class="image is-16by9 is-covered">
+              <img src="/static/assets/mockup_photos.jpg" alt="Diaporama & Photos">
+            </figure>
+          </div>
+          <div class="card-content">
+            <div class="title is-4">
+              4 - Regardez votre plante grandir
+            </div>
+            <div class="subtitle">
+              Maintenant que vous savez vous occuper de votre plante et qu'elle pousse à merveille, revenez
+              régulièrement pour la prendre en photo et ainsi la revoir grandir en téléchargeant le diaporama !
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+  <br>
+  <br>
   <h1 class="title is-2">Nos valeurs / avantages</h1>
   <div class="containers">
     <div class="container">
       <div class="image">
-        <img src="/static/assets/open-source.png" alt="Open Source" />
+        <img src="/static/assets/open-source.png" alt="Open Source"/>
       </div>
       <div class="content">
         <p class="title">Open source</p>
-        <p class="subtitle">Une e-plante est libre et open-source (<a href="https://github.com/minientreprise-scv">voir le code</a>), sous la licence <a href="https://github.com/minientreprise-scv/app/blob/main/LICENSE" target="_blank">Cecill V2.1</a> Les images de "Une e-plante" sont utilisables sous les conditions <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/fr/" target="_blank">CC BY-NC-ND 3.0 FR</a>.</p>
+        <p class="subtitle">Une e-plante est libre et open-source (<a href="https://github.com/minientreprise-scv">voir
+          le code</a>), sous la licence <a href="https://github.com/minientreprise-scv/app/blob/main/LICENSE"
+                                           target="_blank">Cecill V2.1</a> Les images de "Une e-plante" sont utilisables
+          sous les conditions <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/fr/" target="_blank">CC
+            BY-NC-ND 3.0 FR</a>.</p>
       </div>
     </div>
     <div class="container">
       <div class="image">
-        <img src="/static/assets/local.png" alt="Local" />
+        <img src="/static/assets/local.png" alt="Local"/>
       </div>
       <div class="content">
         <p class="title">Local</p>
-        <p class="subtitle">Nous achetons tous nos équipements, terreaux et graines chez nos commerçants locaux (<a href="#contact">voir nos partenaires</a>).</p>
+        <p class="subtitle">Nous achetons tous nos équipements, terreaux et graines chez nos commerçants locaux (<a
+            href="#contact">voir nos partenaires</a>).</p>
       </div>
     </div>
     <div class="container">
       <div class="image">
-        <img src="/static/assets/recyclage.png" alt="Recyclage" />
+        <img src="/static/assets/recyclage.png" alt="Recyclage"/>
       </div>
       <div class="content">
         <p class="title">Respectueux de l'environnement</p>
-        <p class="subtitle">Nos pots sont faits de bouteilles en verre recyclées, les sachets et cartons qui vous sont envoyés sont 100% réutilisés.</p>
+        <p class="subtitle">Nos pots sont faits de bouteilles en verre recyclées, les sachets et cartons qui vous sont
+          envoyés sont 100% réutilisés.</p>
       </div>
     </div>
     <div class="container">
       <div class="image">
-        <img src="/static/assets/unis.png" alt="Unis" />
+        <img src="/static/assets/unis.png" alt="Unis"/>
       </div>
       <div class="content">
         <p class="title">Unis</p>
-        <p class="subtitle">Notre mini-entreprise est composée d'élèves soudés, allant de la 6<sup>ème</sup> à la 3<sup>ème</sup>, ayant tous des tâches pertinentes à accomplir et qu'ils choisissent.</p>
+        <p class="subtitle">Notre mini-entreprise est composée d'élèves soudés, allant de la 6<sup>ème</sup> à la 3<sup>ème</sup>,
+          ayant tous des tâches pertinentes à accomplir et qu'ils choisissent.</p>
       </div>
     </div>
   </div>
@@ -106,38 +193,63 @@
   </div>
 </section>
 <footer class="footer">
-    <div class="left">
-      <div class="image">
-        <img src="/static/assets/charte/logo_large.png" alt="Logo">
-      </div>
-      <p class="is-small">
-        Une e-plante avec <i class="fas fa-heart has-text-red has-text-danger"></i> par les élèves du Sacré Cœur pour "Une e-plante" © 2023
-      </p>
+  <div class="left">
+    <div class="image">
+      <img src="/static/assets/charte/logo_large.png" alt="Logo">
     </div>
-    <div class="right">
-      <div class="list">
-        <ul>
-          <li class="subtitle">Contact</li>
-          <li><a href="mailto:armand@camponovo.xyz">Développeur (Email)</a></li>
-          <li><a href="mailto:sacre-coeur@wanadoo.fr">Collège (Email)</a></li>
-          <li><a href="https://sacrecoeurvercel.com" target="_blank">Collège (Site)</a></li>
-        </ul>
-      </div>
-      <div class="list">
-        <ul>
-          <li class="subtitle">Services</li>
-          <li><a href="mailto:armand@camponovo.xyz">Support</a></li>
-          <li><a href="/buy">Acheter</a></li>
-        </ul>
-      </div>
-      <div class="list">
-        <ul>
-          <li class="subtitle">Documents Légaux</li>
-          <li><a href="/mentions">Mentions légales</a></li>
-          <li><a href="/cgv">Conditions générales de vente</a></li>
-        </ul>
-      </div>
+    <p class="is-small">
+      Une e-plante avec <i class="fas fa-heart has-text-red has-text-danger"></i> par les élèves du Sacré Cœur pour "Une
+      e-plante" © 2023
+    </p>
+  </div>
+  <div class="right">
+    <div class="list">
+      <ul>
+        <li class="subtitle">Contact</li>
+        <li><a href="mailto:armand@camponovo.xyz">Développeur (Email)</a></li>
+        <li><a href="mailto:sacre-coeur@wanadoo.fr">Collège (Email)</a></li>
+        <li><a href="https://sacrecoeurvercel.com" target="_blank">Collège (Site)</a></li>
+      </ul>
     </div>
-  </footer>
+    <div class="list">
+      <ul>
+        <li class="subtitle">Services</li>
+        <li><a href="mailto:armand@camponovo.xyz">Support</a></li>
+        <li><a href="/buy">Acheter</a></li>
+      </ul>
+    </div>
+    <div class="list">
+      <ul>
+        <li class="subtitle">Documents Légaux</li>
+        <li><a href="/mentions">Mentions légales</a></li>
+        <li><a href="/cgv">Conditions générales de vente</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<script>
+    bulmaCarousel.attach('#carousel-images', {
+        slidesToScroll: 1,
+        infinite: true,
+        breakpoints: [
+            {
+                changePoint: 480,
+                slidesToShow: 1,
+                slidesToScroll: 1
+            },
+            {
+                changePoint: 640,
+                slidesToShow: 1,
+                slidesToScroll: 1
+            },
+            {
+                changePoint: 768,
+                slidesToShow: 1,
+                slidesToScroll: 1
+            }
+        ]
+    });
+</script>
 
 {% endblock%}
