@@ -10,3 +10,5 @@ pytz~=2022.1
 Flask~=2.0.3
 Jinja2~=3.1.2
 dnspython
+opencv-python
+git+https://github.com/minientreprise-scv/Image-Validation

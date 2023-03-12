@@ -1,13 +1,17 @@
 import datetime
+import os
 import random
 import re
 import secrets
 
+import cv2
 import markdown
 from bson import ObjectId
 from flask import Flask, render_template, make_response, redirect, request, send_file
 from configparser import ConfigParser
 from planteqr import Database, Plants, Documentation, Expenses
+from plantImageValidation import ValidPlantDetector
+
 
 app = Flask('Une e-plante')
 config = ConfigParser()
@@ -16,6 +20,18 @@ passphrases = config['administration']['passphrases'].split(',')
 database = Database(config).get()
 plants = Plants(database)
 expenses = Expenses(database)
+validPlantDetector = ValidPlantDetector()
+
+
+def check_qr_content(image):
+    reader = cv2.QRCodeDetector()
+    value, _, _ = reader.detectAndDecode(image)
+    if value.startswith(request.scheme + request.host) and '@' in value:
+        plant_id = value.split('@')[-1]
+        plant = plants.get_plant(plant_id)
+        if plant.data is not None:
+            return True
+    return False
 
 
 def has_registered_plant():
@@ -79,6 +95,12 @@ def add_image():
         image_filename = f'{image_id}.{image_ext}'
         image_path = f'data/images/{image_filename}'
         image.save(image_path)
+        image_to_check = cv2.imread(image_path, cv2.IMREAD_COLOR)
+        validPlantDetector.set_second_check(check_qr_content)
+        valid_image = validPlantDetector(image_to_check)
+        if not valid_image:
+            os.remove(image_path)
+            return redirect('/dashboard?message=Image invalide. Veuillez lire les conditions de téléversement dans Autres -> Q et R')
         plants.get_plant(plant).add_image(datetime.datetime.now(), image_path)
         return redirect(f"/dashboard?plant={plant}")
     return redirect('/dashboard')
@@ -243,9 +265,9 @@ def not_found(_):
     return render_template('error.html', message='La page que vous cherchez n\'existe pas... Revenir vers <a href="/">les plantes fleurissantes</a>.')
 
 
-@app.errorhandler(Exception)
-def error(_):
-    return render_template('error.html', message='Une erreur est survenue, veuillez réessayer ou <a href="/#contact">nous contacter</a>.')
+# @app.errorhandler(Exception)
+# def error(_):
+#     return render_template('error.html', message='Une erreur est survenue, veuillez réessayer ou <a href="/#contact">nous contacter</a>.')
 
 
 if __name__ == '__main__':

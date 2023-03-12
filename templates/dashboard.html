@@ -229,6 +229,19 @@
         </div>
       </form>
     </div>
+    <div class="box">
+      <h3 class="title is-4">Télécharger mon QR code</h3>
+      <div class="field">
+        <figure class="image is-square">
+          <img src="/data/qr/{{selected.image}}" alt="Qr code">
+        </figure>
+      </div>
+      <div class="field">
+        <div class="control">
+          <a href="/data/qr/{{selected.image}}" download="{{selected.name|urlencode}}-qrcode.png" class="button is-green">Télécharger&nbsp;<i class="fas fa-download"></i></a>
+        </div>
+      </div>
+    </div>
     <h1 class="title">Q&R</h1>
     <div class="content">
       <blockquote class="is-flex is-justify-content-space-between is-align-items-center" onclick="this.classList.toggle('is-active')">Comment installer l'application ?&nbsp;<i class="fas fa-angle-down"></i></blockquote>
@@ -238,6 +251,11 @@
         - Sur Firefox Mobile, il faut aller sur&nbsp;<i class="fas fa-ellipsis-v"></i>&nbsp;&bkarow;&nbsp;"Installer"<br>
         - Sur les autres navigateurs, comme Safari, allez sur&nbsp;<i class="fas fa-share-alt"></i>&nbsp;ou&nbsp;<i class="fas fa-external-link"></i>&nbsp;(partager)&nbsp;&bkarow;&nbsp;"Ajouter à l'écran d'accueil"<br>
         - Si un problème persiste, <a href="mailto:armand@camponovo.xyz">contactez nous</a> ou installer un navigateur compatible (Chrome, Samsung Internet, Firefox)
+      </div>
+      <blockquote class="is-flex is-justify-content-space-between is-align-items-center" onclick="this.classList.toggle('is-active')">Quels sont les conditions de téléversement d'une image ?&nbsp;<i class="fas fa-angle-down"></i></blockquote>
+      <div class="answer content">
+        Pour nous assurer que vous téléversez seulement des images de vos plantes, nous exigeons que le QR fourni avec votre plante soi visible et lisible sur l'image.
+        Si celui-ci est erroné ou perdu, il vous suffit de le télécharger ci-dessus et de le réimprimer.
       </div>
     </div>
   </section>
@@ -373,6 +391,22 @@
               document.getElementById('network-indicator').classList.remove('is-hidden')
           } else {
               document.getElementById('network-indicator').classList.add('is-hidden')
+          }
+      })
+
+      window.addEventListener('load', () => {
+          let value, key, tuple
+          let searches = window.location.search.replace('?', '').split('&')
+          let searches_by_value = {}
+          for (let search of searches) {
+              tuple = search.split('=')
+              key = tuple[0]
+              value = tuple[1]
+              searches_by_value[key] = value
+          }
+          if (searches_by_value.hasOwnProperty('message')) {
+              alert(decodeURI(searches_by_value['message']))
+              location.href = '/dashboard'
           }
       })
 
