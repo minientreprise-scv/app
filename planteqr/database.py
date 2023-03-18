@@ -14,4 +14,5 @@ class Database:
         mongo_user = self.config['mongodb.net']['mongo_user']
         mongo_password = self.config['mongodb.net']['mongo_password']
         mongo_server = self.config['mongodb.net']['mongo_server']
-        return f'mongodb+srv://{mongo_user}:{mongo_password}@{mongo_server}'
+        mongo_scheme = self.config['mongodb.net']['mongo_scheme']
+        return f'{mongo_scheme}{mongo_user}:{mongo_password}@{mongo_server}'

@@ -50,9 +50,10 @@ python3 -m pip install -r requirements.txt
 - Les informations d'une base MongoDB dans `config.ini` sont requises ainsi que des phrases de passe pour les administrateurs (séparées de virgules).
 ```ini
 [mongodb.net]
-mongo_server=
-mongo_user=
-mongo_password=
+mongo_server=192.168.1.85:27000/?retryWrites=true&w=majority
+mongo_user=user 
+mongo_password=password
+mongo_scheme=mongodb://
 
 [administration]
 passphrases=superpassphraseforadministrat%%r1,anothoeradministartor's p4ssphr4se
