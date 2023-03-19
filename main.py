@@ -252,6 +252,11 @@ def robots():
     return send_file('robots.txt')
 
 
+@app.route('/sitemap.xml')
+def sitemap():
+    return send_file('sitemap.xml')
+
+
 def get_icon_by_state(state):
     return {'planter': ('fa-hand-holding-seedling', 'is-info'), 'pousser': ('fa-leaf', 'is-success'), 'rempoter': ('fa-shovel', 'is-brown'), 'autre': (random.choice(['fa-wheat', 'fa-rainbow', 'fa-flower', 'fa-flower-tulip', 'fa-flower-daffodil']), 'is-link')}[state]
 
