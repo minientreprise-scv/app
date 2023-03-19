@@ -11,4 +11,5 @@ Flask~=2.0.3
 Jinja2~=3.1.2
 dnspython
 opencv-python
+yolov5
 git+https://github.com/minientreprise-scv/Image-Validation
