@@ -53,4 +53,5 @@ jobs:
         touch config.ini
         echo "$CONFIGURATION" > config.ini
         # Perform unit tests and run program
+        python3 -c 'import qrdet'
         python3 _unit_tests.py
