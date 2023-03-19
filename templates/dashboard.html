@@ -14,11 +14,11 @@
 <body>
   <nav class="navbar has-border-bottom" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
-      <a class="navbar-item" href="https://minientreprise.sacrecoeurvercel.com">
+      <a class="navbar-item" href="https://minientreprise.sacrecoeurvercel.com" title="Minientreprise Sacré Coeur Vercel">
         <img src="/static/assets/charte/logo_large.png" height="150" alt="Logo">
       </a>
 
-      <a style="display: none" id="add-to-home-screen" class="navbar-item button is-small is-success is-light is-hidden-desktop">Ajouter à l'écran d'accueil&nbsp;<i class="fas fa-download"></i></a>
+      <a style="display: none" id="add-to-home-screen" class="navbar-item button is-small is-success is-light is-hidden-desktop" title="Ajouter à l'écran d'accueil">Ajouter à l'écran d'accueil&nbsp;<i class="fas fa-download"></i></a>
 
       <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample" onclick="document.getElementById('mainNavMenu').classList.toggle('is-active'); this.classList.toggle('is-active')">
         <span aria-hidden="true"></span>
@@ -29,11 +29,11 @@
 
     <div class="navbar-menu" id="mainNavMenu">
       <div class="navbar-end has-text-info">
-        <a href="/" class="navbar-item">Accueil</a>
-        <a href="/#features" class="navbar-item">Fonctionnalités</a>
-        <a href="/#contact" class="navbar-item">Contact</a>
-        <a href="/scan" class="navbar-item qr">Scanner mon QR&nbsp;<i class="fas fa-qrcode"></i></a>
-        <a href="/dashboard" class="navbar-item dashboard">Mes plantes&nbsp;<i class="fas fa-hand-holding-seedling"></i></a>
+        <a href="/" class="navbar-item" title="Accueil">Accueil</a>
+        <a href="/#features" class="navbar-item" title="Fonctionnalités">Fonctionnalités</a>
+        <a href="/#contact" class="navbar-item" title="Contact">Contact</a>
+        <a href="/scan" class="navbar-item qr" title="Scanner mon QR code">Scanner mon QR&nbsp;<i class="fas fa-qrcode"></i></a>
+        <a href="/dashboard" class="navbar-item dashboard" title="Mes plantes">Mes plantes&nbsp;<i class="fas fa-hand-holding-seedling"></i></a>
       </div>
     </div>
   </nav>
@@ -56,7 +56,7 @@
               <figure class="image is-48x48">
                 <img class="is-rounded is-cover" height="50" src="{{plant.images[-1].path}}" alt="Image de {{plant.name}}">
               </figure>
-              <a href="/dashboard?plant={{plant.sale_id}}" class="has-text-black title is-6">
+              <a href="/dashboard?plant={{plant.sale_id}}" class="has-text-black title is-6" title="Voir la plante {{plant.name}}">
                 &nbsp;&nbsp;{{plant.name}}
               </a>
             </div>
@@ -74,7 +74,7 @@
     <div class="tabs is-centered is-fullwidth is-boxed" aria-label="breadcrumbs">
       <ul>
         <li data-target="section-learn" class="is-active">
-          <a onclick="changeSection('section-learn')">
+          <a onclick="changeSection('section-learn')" title="Passer à la page 'Apprendre'">
             <span class="icon is-small">
               <i class="fas fa-graduation-cap" aria-hidden="true"></i>
             </span>
@@ -82,7 +82,7 @@
           </a>
         </li>
         <li data-target="section-photos">
-          <a onclick="changeSection('section-photos')">
+          <a onclick="changeSection('section-photos')" title="Passer à la page 'Photos'">
             <span class="icon is-small">
               <i class="fas fa-images" aria-hidden="true"></i>
             </span>
@@ -90,7 +90,7 @@
           </a>
         </li>
         <li data-target="section-other">
-          <a onclick="changeSection('section-other')">
+          <a onclick="changeSection('section-other')" title="Passer à la page 'Autres'">
             <span class="icon is-small">
               <i class="fas fa-icons" aria-hidden="true"></i>
             </span>
