@@ -54,7 +54,7 @@
           <div class="dropdown-item is-flex is-align-items-center is-justify-content-center" onclick="location.href = '/dashboard?plant={{plant.sale_id}}'">
             <div class="is-flex is-align-items-center is-justify-content-center">
               <figure class="image is-48x48">
-                <img class="is-rounded is-cover" height="50" src="{% if plant.image|length > 0%}{{plant.images[-1].path}}{% endif %}" alt="Image de {{plant.name}}">
+                <img class="is-rounded is-cover" height="50" src="{% if plant.images|length > 0%}{{plant.images[-1].path}}{% endif %}" alt="Image de {{plant.name}}">
               </figure>
               <a href="/dashboard?plant={{plant.sale_id}}" class="has-text-black title is-6" title="Voir la plante {{plant.name}}">
                 &nbsp;&nbsp;{{plant.name}}
