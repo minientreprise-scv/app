@@ -225,13 +225,13 @@ def add_plant_to_navigator(sale_id):
     has_plants, registered_plants = has_registered_plant()
     if has_plants and sale_id not in registered_plants:
         registered_plants.append(sale_id)
-        response = make_response(redirect(f'/dashboard?show-doc-plant=true&plant={sale_id}'))
+        response = make_response(redirect(f'/dashboard?show-doc-plant=true&plant={sale_id}', code=200))
         response.set_cookie('plants', ','.join(registered_plants), max_age=60 * 60 * 24 * 365 * 2)
         return response
     elif sale_id in registered_plants:
-        return redirect('/dashboard')
+        return redirect('/dashboard', code=200)
     elif not has_plants:
-        response = make_response(redirect(f'/dashboard?show-doc-plant=true&plant={sale_id}'))
+        response = make_response(redirect(f'/dashboard?show-doc-plant=true&plant={sale_id}', code=200))
         response.set_cookie('plants', sale_id, max_age=60 * 60 * 24 * 365 * 2)
         return response
     return redirect('/')
