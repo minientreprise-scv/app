@@ -50,6 +50,7 @@
               console.log(result)
               if (result.data.includes(location.toString().replace('/scan', '/@'))) {
                   window.location = result.data
+                  qrScanner.stop()
               } else {
                   alert('Mauvais Qr code !')
               }
