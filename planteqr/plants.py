@@ -44,7 +44,8 @@ def saveQr(data, filename, subtitle):
     pos = ((qrimg.size[0] - logo.size[0]) // 2, (qrimg.size[1] - logo.size[1]) // 2)
     qrimg.paste(logo, pos)
     draw = ImageDraw.Draw(qrimg)
-    draw.text((qrimg.size[1] - (qrimg.size[1] - len(subtitle) * 1.5), qrimg.size[0] - 30), subtitle, (37, 37, 37), font=font)
+    text_width, _ = draw.textsize(subtitle, font=font)
+    draw.text(((qrimg.size[1] - text_width) / 2, qrimg.size[0] - 30), subtitle, (37, 37, 37), font=font)
     qrimg.save(f'data/qr/{filename}')
 
 
