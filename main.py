@@ -81,7 +81,7 @@ def dashboard():
             documentation_plant['content'].insert(0, """## Bienvenue sur une e-plante !\n\nEn parcourant ces premières pages vous planterez une plante avec votre kit.\n> Cliquez sur suivant pour commencer l'aventure""")
             onload = f"firstLoad('{documentation_plant['_id']}')"
         return render_template('dashboard.html', plants=registered_plants, selected=selected, documentations=documentations, onload=onload)
-    return redirect('/scan', code=301)
+    return redirect('/scan')
 
 
 @app.route('/dashboard/add-image', methods=['POST'])
@@ -100,10 +100,10 @@ def add_image():
         valid_image = validPlantDetector(image_to_check)
         if not valid_image:
             os.remove(image_path)
-            return redirect('/dashboard?message=Image invalide. Veuillez lire les conditions de téléversement dans Autres -> Q et R', code=301)
+            return redirect('/dashboard?message=Image invalide. Veuillez lire les conditions de téléversement dans Autres -> Q et R')
         plants.get_plant(plant).add_image(datetime.datetime.now(), image_path)
-        return redirect(f"/dashboard?plant={plant}", code=301)
-    return redirect('/dashboard', code=301)
+        return redirect(f"/dashboard?plant={plant}")
+    return redirect('/dashboard')
 
 
 @app.route('/dashboard/download-slideshow')
@@ -112,7 +112,7 @@ def download_slideshow():
     if plant is not None:
         plants.get_plant(plant).generate_slideshow()
         return send_file(f'data/images/{plant}.mp4')
-    return redirect('/dashboard', code=301)
+    return redirect('/dashboard')
 
 
 @app.route('/dashboard/change-name', methods=['POST'])
@@ -120,8 +120,8 @@ def change_name():
     form = request.form
     if form.get('plant') is not None:
         plants.get_plant(form.get('plant')).change_name(form.get('name'))
-        return redirect(f"/dashboard?plant={form.get('plant')}", code=301)
-    return redirect('/dashboard', code=301)
+        return redirect(f"/dashboard?plant={form.get('plant')}")
+    return redirect('/dashboard')
 
 
 @app.route('/admin/login', methods=['GET', 'POST'])
@@ -225,16 +225,16 @@ def add_plant_to_navigator(sale_id):
     has_plants, registered_plants = has_registered_plant()
     if has_plants and sale_id not in registered_plants:
         registered_plants.append(sale_id)
-        response = make_response(redirect(f'/dashboard?show-doc-plant=true&plant={sale_id}', code=301))
+        response = make_response(redirect(f'/dashboard?show-doc-plant=true&plant={sale_id}'))
         response.set_cookie('plants', ','.join(registered_plants), max_age=60 * 60 * 24 * 365 * 2)
         return response
     elif sale_id in registered_plants:
-        return redirect('/dashboard', code=301)
+        return redirect('/dashboard')
     elif not has_plants:
-        response = make_response(redirect(f'/dashboard?show-doc-plant=true&plant={sale_id}', code=301))
+        response = make_response(redirect(f'/dashboard?show-doc-plant=true&plant={sale_id}'))
         response.set_cookie('plants', sale_id, max_age=60 * 60 * 24 * 365 * 2)
         return response
-    return redirect('/', code=301)
+    return redirect('/')
 
 
 @app.route('/data/<media_type>/<file>')
