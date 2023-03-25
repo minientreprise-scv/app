@@ -221,20 +221,20 @@ def generate_qr():
 def add_plant_to_navigator(sale_id):
     plant = plants.get_plant(sale_id)
     if plant.data is None:
-        return 'Aucune plante trouvée... <a href="/scan">Réessayer</a> ou <a href="mailto:armand@camponovo.xyz">nous contacter</a>'
+        return 'Aucune plante trouvée... <a href="/scan">Réessayer</a> ou <a href="mailto:armand@camponovo.xyz">nous contacter</a>', 404
     has_plants, registered_plants = has_registered_plant()
     if has_plants and sale_id not in registered_plants:
         registered_plants.append(sale_id)
         response = make_response(redirect(f'/dashboard?show-doc-plant=true&plant={sale_id}'))
         response.set_cookie('plants', ','.join(registered_plants), max_age=60 * 60 * 24 * 365 * 2)
-        return response
+        return response, 200
     elif sale_id in registered_plants:
-        return redirect('/dashboard')
+        return redirect('/dashboard'), 200
     elif not has_plants:
         response = make_response(redirect(f'/dashboard?show-doc-plant=true&plant={sale_id}'))
         response.set_cookie('plants', sale_id, max_age=60 * 60 * 24 * 365 * 2)
-        return response
-    return redirect('/')
+        return response, 200
+    return redirect('/'), 200
 
 
 @app.route('/data/<media_type>/<file>')
