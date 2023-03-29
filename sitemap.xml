@@ -5,7 +5,7 @@
 
     <url>
 
-        <loc>https://planteqr.camarm.fr</loc>
+        <loc>https://planteqr.eu.org</loc>
 
         <lastmod>2023-03-20</lastmod>
 
@@ -18,7 +18,7 @@
 
     <url>
 
-        <loc>https://planteqr.camarm.fr/scan</loc>
+        <loc>https://planteqr.eu.org/scan</loc>
 
         <changefreq>never</changefreq>
 
@@ -26,7 +26,7 @@
 
     <url>
 
-        <loc>https://planteqr.camarm.fr/dashboard</loc>
+        <loc>https://planteqr.eu.org/dashboard</loc>
 
         <changefreq>always</changefreq>
 
