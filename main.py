@@ -221,7 +221,7 @@ def generate_qr():
 def add_plant_to_navigator(sale_id):
     plant = plants.get_plant(sale_id)
     if plant.data is None:
-        return 'Aucune plante trouvée... <a href="/scan">Réessayer</a> ou <a href="mailto:armand@camponovo.xyz">nous contacter</a>'
+        return 'Aucune plante trouvée... <a href="/scan">Réessayer</a> ou <a href="mailto:contact@planteqr.eu.org">nous contacter</a>'
     has_plants, registered_plants = has_registered_plant()
     if has_plants and sale_id not in registered_plants:
         registered_plants.append(sale_id)
