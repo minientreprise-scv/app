@@ -1,7 +1,7 @@
 {
   "background_color": "#e0e0e0",
   "theme_color": "#1ab260",
-  "description": "Une e-plante vous guide pas à pas dans la pousse de vos plantes !",
+  "description": "La Plante Qr vous guide pas à pas dans la pousse de vos plantes !",
   "display": "fullscreen",
   "lang": "fr",
   "orientation": "portrait",
@@ -12,7 +12,7 @@
       "type": "image/png"
     }
   ],
-  "name": "Une e-plante",
+  "name": "La Plante Qr",
   "short_name": "Planteqr",
   "start_url": "/dashboard"
 }

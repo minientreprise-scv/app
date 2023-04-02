@@ -13,7 +13,7 @@ from planteqr import Database, Plants, Documentation, Expenses
 from plantImageValidation import ValidPlantDetector
 
 
-app = Flask('Une e-plante')
+app = Flask('La Plante Qr')
 config = ConfigParser()
 config.read('config.ini')
 passphrases = config['administration']['passphrases'].split(',')
@@ -78,7 +78,7 @@ def dashboard():
                 if doc['state'] == Documentation.plant:
                     documentation_plant = doc
                     break
-            documentation_plant['content'].insert(0, """## Bienvenue sur une e-plante !\n\nEn parcourant ces premières pages vous planterez une plante avec votre kit.\n> Cliquez sur suivant pour commencer l'aventure""")
+            documentation_plant['content'].insert(0, """## Bienvenue sur La Plante Qr !\n\nEn parcourant ces premières pages vous planterez une plante avec votre kit.\n> Cliquez sur suivant pour commencer l'aventure""")
             onload = f"firstLoad('{documentation_plant['_id']}')"
         return render_template('dashboard.html', plants=registered_plants, selected=selected, documentations=documentations, onload=onload)
     return redirect('/scan')
