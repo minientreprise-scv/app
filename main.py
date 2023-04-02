@@ -252,6 +252,18 @@ def robots():
     return send_file('robots.txt')
 
 
+@app.route('/licence')
+def deliver_licence():
+    if request.args.get('ref') is None:
+        return send_file('LICENSE.cecill', download_name="LICENCE_PLANTEQR_CODE.txt")
+    return send_file(f"LICENSE.{request.args.get('ref')}", download_name=f"LICENCE_PLANTEQR_{request.args.get('ref')}.txt")
+
+
+@app.route('/mentions')
+def mentions():
+    return render_template("content.html", name="Mentions Légales", content=open("MENTIONS_LEGALES.md").read())
+
+
 @app.route('/sitemap.xml')
 def sitemap():
     return send_file('sitemap.xml')

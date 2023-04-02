@@ -1,0 +1,11 @@
+{% extends "navbar.html" %}
+
+{% block title %}Une e-plante, {{name}}{% endblock %}
+
+{% block content %}
+
+<header class="section is-large content" style="clip-path: none; height: 100vh">
+  {{content|safe}}
+</header>
+
+{% endblock %}
