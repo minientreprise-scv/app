@@ -25,6 +25,10 @@ html {
     background-color: var(--white);
 }
 
+* {
+    scroll-behavior: smooth !important;
+}
+
 body {
     font-family: "Liivic-Website", sans-serif;
     background-color: var(--white);
