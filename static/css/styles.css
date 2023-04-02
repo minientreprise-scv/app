@@ -30,6 +30,8 @@ body {
     background-color: var(--white);
     color: var(--black);
     scroll-behavior: smooth !important;
+    max-width: 100vw;
+    overflow: hidden;
 }
 
 .title {
@@ -683,6 +685,11 @@ table tbody th .tag {
         width: 100%;
     }
 
+
+    .container .subtitle {
+        font-size: 1.5em;
+    }
+
     :not(.carousel) .container:not(.is-carousel-ancestor) {
         height: max-content;
         transform: scale(0.8);
@@ -708,6 +715,6 @@ table tbody th .tag {
     }
 
     .footer:before {
-        transform: translateY(-150%);
+        transform: translateY(-120%);
     }
 }
