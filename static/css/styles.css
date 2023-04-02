@@ -30,7 +30,7 @@ html {
 }
 
 body {
-    font-family: "Liivic-Website", sans-serif;
+    font-family: "Liivic-Website", inherit, sans-serif;
     background-color: var(--white);
     color: var(--black);
     scroll-behavior: smooth !important;
