@@ -1,12 +1,16 @@
+const doNotCache = ['https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.3/dist/js/bulma-carousel.min.js']
+
 const addResourcesToCache = async (resources) => {
-    const cache = await caches.open("v1");
+    const cache = await caches.open("v1.2");
     await cache.addAll(resources);
 };
 
 const cacheFirst = async (request) => {
     const responseFromCache = await caches.match(request);
     const responseFromCacheWithOtherSite = await caches.match(request.url);
-    if (navigator.onLine) {
+    if (doNotCache.includes(request.url)) {
+        return fetch(request)
+    } else if (navigator.onLine) {
         await addResourcesToCache([request])
         return fetch(request)
     }
