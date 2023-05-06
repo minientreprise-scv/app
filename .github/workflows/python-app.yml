@@ -53,13 +53,13 @@ jobs:
         touch config.ini
         echo "$CONFIGURATION" > config.ini
         # Perform unit tests and run program
-#        mkdir -p /opt
-#        mkdir -p /opt/hostedtoolcache
-#        mkdir -p /opt/hostedtoolcache/python
-#        mkdir -p /opt/hostedtoolcache/python/3.10.11
-#        mkdir -p /opt/hostedtoolcache/python/3.10.11/x64
-#        mkdir -p /opt/hostedtoolcache/python/3.10.11/x64/lib
-#        mkdir -p /opt/hostedtoolcache/python/3.10.11/x64/lib/python3.10
+        #        mkdir -p /opt
+        #        mkdir -p /opt/hostedtoolcache
+        #        mkdir -p /opt/hostedtoolcache/python
+        #        mkdir -p /opt/hostedtoolcache/python/3.10.11
+        #        mkdir -p /opt/hostedtoolcache/python/3.10.11/x64
+        #        mkdir -p /opt/hostedtoolcache/python/3.10.11/x64/lib
+        #        mkdir -p /opt/hostedtoolcache/python/3.10.11/x64/lib/python3.10
         tree /opt
         touch /opt/hostedtoolcache/python/3.10.11/x64/lib/python3.10/site-packages/.yolov7_qrdetvc7fummf.tmp
         python3 -c 'import qrdet; qrdet.QRDetector()'
