@@ -53,6 +53,6 @@ jobs:
         touch config.ini
         echo "$CONFIGURATION" > config.ini
         # Perform unit tests and run program
-        cp .github/workflows/utils.py -o /opt/hostedtoolcache/Python/3.10.11/x64/lib/python3.10/site-packages/yolov7_package/utils/google_utils.py
+        cp .github/workflows/utils.py /opt/hostedtoolcache/Python/3.10.11/x64/lib/python3.10/site-packages/yolov7_package/utils/google_utils.py
         python3 -c 'import qrdet; qrdet.QRDetector()'
         python3 _unit_tests.py
