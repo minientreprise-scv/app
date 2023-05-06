@@ -63,6 +63,7 @@ def dashboard():
     has_plants, registered_plants_ids = has_registered_plant()
     if has_plants:
         registered_plants = [plants.get_plant(_id).data for _id in registered_plants_ids]
+        registered_plants = [plant for plant in registered_plants if plant is not None]
         if request.args.get('plant') is None:
             selected = registered_plants[0]
         else:
@@ -84,7 +85,7 @@ def dashboard():
     return redirect('/scan')
 
 
-@app.route('/dashboard/add-image', methods=['POST'])
+@app.route('/dashboard/add-image', methods=['POST', 'GET'])
 def add_image():
     form = request.form
     plant = form.get('plant')
@@ -100,7 +101,7 @@ def add_image():
         valid_image = validPlantDetector(image_to_check)
         if not valid_image:
             os.remove(image_path)
-            return redirect('/dashboard?message=Image invalide. Veuillez lire les conditions de téléversement dans Autres -> Q et R')
+            return redirect(f'/dashboard?message=Image invalide. Veuillez lire les conditions de téléversement dans Autres -> Q et R&plant={plant}')
         plants.get_plant(plant).add_image(datetime.datetime.now(), image_path)
         return redirect(f"/dashboard?plant={plant}")
     return redirect('/dashboard')
