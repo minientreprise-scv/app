@@ -1,4 +1,6 @@
-const doNotCache = ['https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.3/dist/js/bulma-carousel.min.js']
+const doNotCache = [
+    '/dashboard/add-image'
+]
 
 const addResourcesToCache = async (resources) => {
     const cache = await caches.open("v1.2");
@@ -8,7 +10,7 @@ const addResourcesToCache = async (resources) => {
 const cacheFirst = async (request) => {
     const responseFromCache = await caches.match(request);
     const responseFromCacheWithOtherSite = await caches.match(request.url);
-    if (doNotCache.includes(request.url)) {
+    if (doNotCache.includes(request.url) || request.method === 'POST') {
         return fetch(request)
     } else if (navigator.onLine) {
         await addResourcesToCache([request])
