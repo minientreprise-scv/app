@@ -53,15 +53,6 @@ jobs:
         touch config.ini
         echo "$CONFIGURATION" > config.ini
         # Perform unit tests and run program
-        #        mkdir -p /opt
-        #        mkdir -p /opt/hostedtoolcache
-        #        mkdir -p /opt/hostedtoolcache/python
-        #        mkdir -p /opt/hostedtoolcache/python/3.10.11
-        #        mkdir -p /opt/hostedtoolcache/python/3.10.11/x64
-        #        mkdir -p /opt/hostedtoolcache/python/3.10.11/x64/lib
-        #        mkdir -p /opt/hostedtoolcache/python/3.10.11/x64/lib/python3.10
         cp .github/workflows/utils.py -o /opt/hostedtoolcache/Python/3.10.11/x64/lib/python3.10/site-packages/yolov7_package/utils/google_utils.py
-        tree /opt/hostedtoolcache/python
-        touch /opt/hostedtoolcache/python/3.10.11/x64/lib/python3.10/site-packages/.yolov7_qrdetvc7fummf.tmp
         python3 -c 'import qrdet; qrdet.QRDetector()'
         python3 _unit_tests.py
