@@ -152,6 +152,7 @@ def administration():
         balance_by_day = expenses.get_balance_ordered_by_days()
         balance_chart_labels = list(balance_by_day.keys())
         balance_chart_datas = [balance_by_day[day] for day in balance_chart_labels]
+        balance_chart_labels.reverse()
         return render_template('admin.html', sold=plants_sold_number, types=plants_types_number, documentations=documentations_pages_number, plants_types=list(plants_types), documentation_types=documentation_types, documentation_pages=documentations_pages, expenses=all_expense, expenses_chart=(balance_chart_labels, balance_chart_datas))
     return redirect('/admin/login')
 
