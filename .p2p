@@ -1,0 +1,4 @@
+DIST planteqr
+CTX /root/app
+COMMAND git pull
+COMMAND pm2 restart all
