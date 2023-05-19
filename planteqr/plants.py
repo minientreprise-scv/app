@@ -40,7 +40,7 @@ def saveQr(data, filename, subtitle):
     qr = QRCode(error_correction=ERROR_CORRECT_H)
     qr.add_data(data)
     qr.make()
-    qrimg = qr.make_image(fill_color="#252525", back_color="#e0e0e0").convert('RGBA')
+    qrimg = qr.make_image(fill_color="#252525", back_color="#ffffff").convert('RGBA')
     pos = ((qrimg.size[0] - logo.size[0]) // 2, (qrimg.size[1] - logo.size[1]) // 2)
     qrimg.paste(logo, pos)
     draw = ImageDraw.Draw(qrimg)
