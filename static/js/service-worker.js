@@ -1,5 +1,8 @@
 const doNotCache = [
-    '/dashboard/add-image'
+    '/dashboard/add-image',
+    'https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css',
+    'https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js',
+    'https://cdn.jsdelivr.net/npm/chart.js'
 ]
 
 const addResourcesToCache = async (resources) => {
