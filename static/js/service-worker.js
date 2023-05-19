@@ -13,7 +13,7 @@ const addResourcesToCache = async (resources) => {
 const cacheFirst = async (request) => {
     const responseFromCache = await caches.match(request);
     const responseFromCacheWithOtherSite = await caches.match(request.url);
-    if (doNotCache.includes(request.url) || request.method === 'POST') {
+    if (doNotCache.includes(request.url) || request.method === 'POST' || request.url.startsWith('@')) {
         return fetch(request)
     } else if (navigator.onLine) {
         await addResourcesToCache([request])
