@@ -26,7 +26,8 @@ validPlantDetector = ValidPlantDetector()
 def check_qr_content(image):
     reader = cv2.QRCodeDetector()
     value, _, _ = reader.detectAndDecode(image)
-    if value.startswith(request.scheme + request.host) and '@' in value:
+    checks = ['planteqr.eu.org' in value or 'planteqr.camarm.fr' in value, '@' in value]
+    if all(checks):
         plant_id = value.split('@')[-1]
         plant = plants.get_plant(plant_id)
         if plant.data is not None:
