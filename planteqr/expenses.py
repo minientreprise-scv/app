@@ -33,7 +33,7 @@ class Expenses:
         return self.db.expenses.find({})
 
     def get_balance_ordered_by_days(self):
-        expenses = self.db.expenses.find({}).sort([('$natural', -1)])
+        expenses = self.db.expenses.find({}).sort([('$natural', 1)])
         balance = 0
         balance_by_day = {}
         for expense in expenses:
